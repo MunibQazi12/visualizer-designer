@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+}
+
+.meterial-preview {
+  background-image: url(../../public/images/meterial-bg.png);
+}
+.slick-slide {
+  max-width: 232px;
+}
+
+
+.slick-track {
+  display: flex !important;
+  justify-content: space-between;
+}
