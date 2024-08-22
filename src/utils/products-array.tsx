@@ -30,9 +30,8 @@ export const DefaultProducts = [
 ]
 
 export const FeaturesElements = [
-    { id: 1, featuresImage: <Walls/>  },
-    { id: 2, featuresImage: <Sink/>  },
-    { id: 3, featuresImage: <SecurityWall/> },
-    { id: 4, featuresImage: <LightIcon/> },
-
+    { id: 1, featuresImage: 'Walls'  },
+    { id: 2, featuresImage: 'Sink'  },
+    { id: 3, featuresImage: 'SecurityWall' },
+    { id: 4, featuresImage: 'LightIcon' },
 ]

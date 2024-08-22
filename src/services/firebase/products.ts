@@ -8,7 +8,7 @@ const Products = {
       return products
     } else {
       console.log("No data available");
-      return snapshot.val();
+      return [];
     }
   },
 
@@ -21,5 +21,8 @@ const Products = {
   //     }
   //   });
 };
+
+
+
 
 export default Products;
