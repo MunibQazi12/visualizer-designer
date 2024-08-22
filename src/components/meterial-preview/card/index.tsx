@@ -14,7 +14,7 @@ const Card: FC<Props> = (props) => {
             <Image className=' rounded-t-lg ' src={productImage} alt="Product Image" width={232} height={100} />
             <div className='px-4 pt-[5px]'>
                 <h3>{title}</h3>
-                <p className='text-sm text-[#49454F]'>{description}</p>
+                <p className='text-sm text-primary-200'>{description}</p>
             </div>
         </div>
     )

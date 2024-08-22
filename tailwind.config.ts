@@ -8,10 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      
-     
+      colors: {
+        primary: {
+          100: "#495057",
+          200 : '#49454F',
+        },
+        customWhite : {
+          500 : '#9B9B9B75',
+          600 :'#FFFFFFA6',
+        }
+      },
     },
   },
   plugins: [],
 };
+
 export default config;

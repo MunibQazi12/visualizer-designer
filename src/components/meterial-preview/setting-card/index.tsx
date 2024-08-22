@@ -1,62 +1,24 @@
 import { I_Products } from "@/utils/Interfaces/Products";
 import Image from "next/image";
 
-interface I_Props {
-  products: I_Products[];
-}
+import Selections from "./selections"
+import Activites from "./activites"
 
-const SettingCard = (props: I_Props) => {
+import { ActiveProducts, DefaultProducts } from "@/utils/products-array"
 
-  return (
-    <div className="w-full flex justify-end mt-[131px] ">
-      <div className="bg-[#FFFFFFA6] mr-[110px] w-[414px] px-[30px] rounded-md">
-        <p className="text-[#495057] font-semibold text-xl">Cabinet Options</p>
-        <p className="mt-3 text-[#495057] font-semibold text-sm">
-          Active Selections
-        </p>
-        <div className="mt-2 flex items-center w-full justify-between">
-          <div>
-            <Image
-              src="/images/cabnitMaterial.png"
-              alt="cabnit"
-              width={98}
-              height={97}
-            />
-            <p className="text-center text-[#495057] font-medium text-[10px]">
-              Cabinet Material
-            </p>
-            <p className="text-center text-[10px] text-[#495057]">Pine</p>
-          </div>
-          <div>
-            <Image
-              src="/images/CabinetHardware.png"
-              alt="cabnit"
-              width={98}
-              height={97}
-            />
-            <p className="text-center text-[#495057] font-medium text-[10px]">
-              Cabinet Hardware
-            </p>
-            <p className="text-center text-[10px] text-[#495057]">
-              Lyon 8233 PC
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/images/CabinetFinish.png"
-              alt="cabnit"
-              width={98}
-              height={97}
-            />
-            <p className="text-center text-[#495057] font-medium text-[10px]">
-              Cabinet Finish
-            </p>
-            <p className="text-center text-[10px] text-[#495057]">Dove Level</p>
-          </div>
+const SettingCard = () => {
+    return (
+        <div className='w-full flex justify-end mt-[131px] '>
+            <div className='bg-customWhite-600 mr-4 w-[414px] px-[30px] rounded-md py-[26px]'>
+                <p className='text-primary-100 font-semibold text-xl'>Cabinet Options</p>
+                <Selections title="Active Selections" products={ActiveProducts} />
+                <div className="my-6">
+                    <Selections title="Default Selections" products={DefaultProducts} />
+                </div>
+            </div>
+            <Activites/>
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+}
 
 export default SettingCard;
