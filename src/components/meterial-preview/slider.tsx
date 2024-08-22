@@ -1,59 +1,49 @@
-'use client'
-import React from "react";
+"use client";
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "./card";
-import Products from '@/utils/products-array'
+import { sliderSettings } from "@/constants/slider-config";
+import { I_Products } from "@/utils/Interfaces/Products";
 
+import ApplicationIcon from "../../../public/svgs/application-icon";
+import Button from "@/constants/button";
+import FunctionalItems from "./functional-items";
 
-const ImageSlider = () => {
-  var settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 4,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
+interface I_Props {
+  products: I_Products[];
+}
+
+const ImageSlider = (props: I_Props) => {
+  const { products } = props;
+
   return (
-    <div className="slider-container max-w-[1340px] mx-auto absolute bottom-[80px] left-0 right-0">
-      <Slider {...settings} className="gap-5">
-        {Products.map((data) => {
-          const {productImage , title , description} = data;
+    <div className="slider-container 2xl:max-w-[1340px] 2xl:w-full w-[70%] mx-auto absolute 2xl:bottom-[6.785932721712538vh] bottom-[3.281345565749236vh] left-0 right-0">
+      <Button
+        className="mx-auto w-[136px] 2xl:h-9 h-7 bg-white rounded-full"
+        iconStart={<ApplicationIcon />}
+      >
+        <span className="2xl:text-lg font-medium text-primary-100 ml-2">
+          View All
+        </span>
+      </Button>
+      <Slider {...sliderSettings} className="gap-5 2xl:mt-7 mt-4">
+        {products.map((product: I_Products) => {
+          const { productImage, title, description, id } = product;
           return (
-            <Card productImage={productImage} title={title} description={description} />
-          )
-        }
-        )}
+            <Card
+              key={id}
+              productImage={productImage}
+              title={title}
+              description={description}
+            />
+          );
+        })}
       </Slider>
+      <FunctionalItems />
     </div>
   );
-}
+};
 
 export default ImageSlider;

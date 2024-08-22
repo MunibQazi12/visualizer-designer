@@ -1,31 +1,39 @@
-import Image from 'next/image'
+import { I_FeaturesElements, I_Products } from "@/utils/Interfaces/Products";
 
-const SettingCard = () => {
+import Selections from "./selections"
+import Activites from "./activites"
+
+import { ActiveProducts, DefaultProducts } from "@/utils/products-array"
+
+
+// createDefaultProductsCollection();
+// createActiveProductsCollection();
+// createFeaturesElementsCollection();
+
+// import { createActiveProductsCollection, createDefaultProductsCollection, createFeaturesElementsCollection } from "@/services/firebase/CreateCollection";
+
+interface I_Props {
+    ActiveProducts: I_Products[];
+    DefaultProducts: I_Products[];
+    FeaturesElements: I_FeaturesElements[];
+}
+
+const SettingCard = (props: I_Props) => {
+
+    const {ActiveProducts, DefaultProducts, FeaturesElements } = props;
+    
     return (
-        <div className='w-full flex justify-end mt-[131px] '>
-            <div className='bg-[#FFFFFFA6] mr-[110px] w-[414px] px-[30px] rounded-md'>
-                <p className='text-[#495057] font-semibold text-xl'>Cabinet Options</p>
-                <p className='mt-3 text-[#495057] font-semibold text-sm'>Active Selections</p>
-                <div className='mt-2 flex items-center w-full justify-between'>
-                    <div>
-                        <Image src="/images/cabnitMaterial.png" alt='cabnit' width={98} height={97} />
-                        <p className='text-center text-[#495057] font-medium text-[10px]'>Cabinet Material</p>
-                        <p className='text-center text-[10px] text-[#495057]'>Pine</p>
-                    </div>
-                    <div>
-                        <Image src="/images/CabinetHardware.png" alt='cabnit' width={98} height={97} />
-                        <p className='text-center text-[#495057] font-medium text-[10px]'>Cabinet Hardware</p>
-                        <p className='text-center text-[10px] text-[#495057]'>Lyon 8233 PC</p>
-                    </div>
-                    <div>
-                        <Image src="/images/CabinetFinish.png" alt='cabnit' width={98} height={97} />
-                        <p className='text-center text-[#495057] font-medium text-[10px]'>Cabinet Finish</p>
-                        <p className='text-center text-[10px] text-[#495057]'>Dove Level</p>
-                    </div>
+        <div className='w-full flex justify-end 2xl:mt-[9.232415902140673vh] mt-[6.339449541284404vh]'>
+            <div className='bg-customWhite-600 mr-4 2xl:w-[414px] p-4 rounded-md'>
+                <p className='text-primary-100 font-semibold 2xl:text-[3.058103975535168vh] text-[2.7522935779816513vh]'>Cabinet Options</p>
+                <Selections title="Active Selections" products={ActiveProducts} />
+                <div className="py-4">
+                    <Selections title="Default Selections" products={DefaultProducts} />
                 </div>
             </div>
+            <Activites FeaturesElements={FeaturesElements}/>
         </div>
     )
 }
 
-export default SettingCard
+export default SettingCard;

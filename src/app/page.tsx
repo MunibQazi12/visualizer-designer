@@ -1,9 +1,9 @@
-import  MeterialPreview  from "@/components/meterial-preview";
+import  MaterialPreview  from "@/components/meterial-preview";
 
 export default function Home() {
   return (
     <div>
-      <MeterialPreview/>
+      <MaterialPreview/>
     </div>
   );
 }
