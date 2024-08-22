@@ -19,7 +19,7 @@ const ImageSlider = (props: I_Props) => {
   const { products } = props;
 
   return (
-    <div className="slider-container max-w-[1340px] mx-auto absolute bottom-[80px] left-0 right-0">
+    <div className="slider-container 2xl:max-w-[1340px] xl:max-w-[calc(100%-200px)] mx-auto absolute 2xl:bottom-20 bottom-10 left-0 right-0">
       <Button
         className="mx-auto w-[136px] h-9 bg-white rounded-full"
         iconStart={<ApplicationIcon />}
@@ -28,7 +28,7 @@ const ImageSlider = (props: I_Props) => {
           View All
         </span>
       </Button>
-      <Slider {...sliderSettings} className="gap-5 mt-7">
+      <Slider {...sliderSettings} className="gap-5 2xl:mt-7 mt-4">
         {products.map((product: I_Products) => {
           const { productImage, title, description, id } = product;
           return (
