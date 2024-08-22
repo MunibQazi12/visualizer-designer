@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card from "./card";
-import Products from '@/app/utils/products-array'
+import Products from '@/utils/products-array'
 
 
 const ImageSlider = () => {

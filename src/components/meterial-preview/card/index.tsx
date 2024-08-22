@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Image from 'next/image'
 
 interface Props {
@@ -7,7 +7,8 @@ interface Props {
     description: string,
 }
 
-const Card: FC<Props> = ({ productImage, title, description }) => {
+const Card: FC<Props> = (props) => {
+    const { productImage, title, description } = props;
     return (
         <div className='bg-white w-[232px] h-[196px] rounded-lg'>
             <Image className=' rounded-t-lg ' src={productImage} alt="Product Image" width={232} height={100} />
