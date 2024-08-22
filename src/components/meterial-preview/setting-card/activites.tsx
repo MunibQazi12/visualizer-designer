@@ -34,7 +34,7 @@ const Activites = (props: I_Props) => {
         return (
           <button
             key={id}
-            className="h-[52px] w-[52px] bg-white rounded-full flex justify-center items-center"
+            className="2xl:h-[52px] h-10 w-10 2xl:w-[52px] bg-white rounded-full flex justify-center items-center"
           >
             {featureImageHandler(featuresImage)}
           </button>

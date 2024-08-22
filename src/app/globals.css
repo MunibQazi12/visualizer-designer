@@ -26,6 +26,10 @@ a {
   text-decoration: none;
 }
 
+.slick-list {
+  padding: 0px !important;
+}
+
 .slick-prev:before,
 .slick-next:before {
   border-bottom-style: solid;
@@ -46,4 +50,13 @@ a {
 .slick-next:before {
   left: 30px;
   transform: rotate(-47deg) !important;
+}
+
+@media (min-width: 1560px) {
+  .slick-prev:before {
+    left: -30px;
+  }
+  .slick-next:before {
+    left: 30px;
+  }
 }

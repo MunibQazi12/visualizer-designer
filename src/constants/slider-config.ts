@@ -2,7 +2,6 @@ export const sliderSettings = {
   className: "center",
   centerMode: true,
   infinite: true,
-  centerPadding: "60px",
   slidesToShow: 4,
   responsive: [
     {
@@ -27,8 +26,7 @@ export const sliderSettings = {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
+        infinite: true,
       },
     },
     {
