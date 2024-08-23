@@ -3,27 +3,19 @@ import { I_FeaturesElements, I_Products } from "@/utils/Interfaces/Products";
 import Selections from "./selections"
 import Activites from "./activites"
 
-import { ActiveProducts, DefaultProducts } from "@/utils/products-array"
-
-
-// createDefaultProductsCollection();
-// createActiveProductsCollection();
-// createFeaturesElementsCollection();
-
-// import { createActiveProductsCollection, createDefaultProductsCollection, createFeaturesElementsCollection } from "@/services/firebase/CreateCollection";
-
 interface I_Props {
     ActiveProducts: I_Products[];
     DefaultProducts: I_Products[];
     FeaturesElements: I_FeaturesElements[];
+    selectedKitchenType: any
 }
 
 const SettingCard = (props: I_Props) => {
 
-    const {ActiveProducts, DefaultProducts, FeaturesElements } = props;
+    const {ActiveProducts, DefaultProducts, FeaturesElements, selectedKitchenType } = props;
     
     return (
-        <div className='w-full flex justify-end 2xl:mt-[9.232415902140673vh] mt-[6.339449541284404vh]'>
+        <div className={`flex justify-end pr-[33px] transition ease-in-out duration-300 ${selectedKitchenType.cabinet_selection ? 'cabinet-fadeIn' : 'cabinet-fadeOut'}`}>
             <div className='bg-customWhite-600 mr-4 2xl:w-[414px] p-4 rounded-md'>
                 <p className='text-primary-100 font-semibold 2xl:text-[3.058103975535168vh] text-[2.7522935779816513vh]'>Cabinet Options</p>
                 <Selections title="Active Selections" products={ActiveProducts} />

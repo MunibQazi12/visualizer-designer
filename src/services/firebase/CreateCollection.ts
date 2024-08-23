@@ -1,5 +1,5 @@
 import { getDatabase, ref, set } from "firebase/database";
-import {ActiveProducts, DefaultProducts, FeaturesElements, Products} from "@/utils/products-array";
+import {ActiveProducts, DefaultProducts, FeaturesElements, Products, visualizerDesign} from "@/utils/products-array";
 import FirebaseConf from "@/services/firebase/configuration";
 
 export const createProductsCollection = () => {
@@ -67,6 +67,28 @@ export const createFeaturesElementsCollection = () => {
     });
 };
 
+
+export const createVisualizerDesignCollection = () => {
+  const database = getDatabase(FirebaseConf);
+
+  // Reference the "collection" (node) you want to create
+  const collectionRef = ref(database, "visualizerDesign");
+
+  // Set data to the collection
+  set(collectionRef, visualizerDesign)
+    .then(() => {
+      console.log("Collection created successfully!");
+    })
+    .catch((error) => {
+      console.error("Error creating collection: ", error);
+    });
+};
+
+// createProductsCollection();
+// createDefaultProductsCollection();
+// createActiveProductsCollection();
+// createFeaturesElementsCollection();
+// createVisualizerDesignCollection();
 
 
 //   Call the function to create the collection

@@ -16,6 +16,12 @@ const config: Config = {
         customWhite : {
           500 : '#9B9B9B75',
           600 :'#FFFFFFA6',
+        },
+        green : {
+          500 : '#70C23E'
+        },
+        gray : {
+          400 : '#8896a5'
         }
       },
     },
