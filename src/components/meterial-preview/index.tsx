@@ -64,8 +64,8 @@ const MaterialPreview = () => {
 
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
-      <MainSteppers stepLabels={stepLabels}/>
-      <MainSteppers stepLabels={topStepLabels}/>
+      <MainSteppers stepLabels={stepLabels} activeStep={1}/>
+      {/* <MainSteppers stepLabels={topStepLabels}/> */}
       <StepDetails />
       <SettingCard
         ActiveProducts={activeProducts}

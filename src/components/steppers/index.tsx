@@ -1,15 +1,16 @@
 import { Stepper } from "react-form-stepper";
 
 interface I_Props {
-    stepLabels: any
+    stepLabels: any;
+    activeStep: number;
 }
 
 const CustomStepper = (props: I_Props) => {
-    const {stepLabels} = props;
+    const {stepLabels, activeStep} = props;
   return (
     <Stepper
       steps={stepLabels}
-      activeStep={1}
+      activeStep={activeStep}
     />
   );
 };
