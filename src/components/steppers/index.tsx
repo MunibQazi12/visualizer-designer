@@ -9,40 +9,50 @@ interface I_Props {
 
 const CustomStepper = (props: I_Props) => {
   const { activeStep, selectedSteps } = props;
-  const [currentStep, setCurrentStep] = useState(0); // Start at step 1
 
-  console.log("currentStep: ", currentStep);
   return (
     <>
       <Stepper activeStep={activeStep} className="mainStepper">
-        {/* <span > */}
-        <Step index={0} label="Exterior" onClick={() => selectedSteps(0)} />
-        {/* </span> */}
+        <Step
+          index={0}
+          disabled={false}
+          label="Exterior"
+          className={`${activeStep === 0 ? "active-stepper" : ""}`}
+          onClick={() => {
+            selectedSteps(0);
+          }}
+        />
 
-        {/* <span onClick={() => selectedSteps(1)}> */}
-        <Step index={1} label="1st Floor" onClick={() => selectedSteps(1)} />
-        {/* </span> */}
+        <Step
+          index={1}
+          disabled={false}
+          label="1st Floor"
+          className={`${activeStep === 1 ? "active-stepper" : ""}`}
+          onClick={() => {
+            selectedSteps(1);
+          }}
+        />
 
-        {/* <span onClick={() => selectedSteps(2)}> */}
-          <Step index={2} label="2nd Floor"onClick={() => selectedSteps(2)} />
-        {/* </span> */}
+        <Step
+          index={2}
+          disabled={false}
+          label="2nd Floor"
+          className={`${activeStep === 2 ? "active-stepper" : ""}`}
+          onClick={() => {
+            selectedSteps(2);
+          }}
+        />
 
-        {/* <span onClick={() => selectedSteps(3)}> */}
-          <Step index={3} label="Review" onClick={() => selectedSteps(3)}/>
-        {/* </span> */}
+        <Step
+          index={3}
+          disabled={false}
+          label="Review"
+          className={`${activeStep === 3 ? "active-stepper" : ""}`}
+          onClick={() => {
+            selectedSteps(3);
+          }}
+        />
       </Stepper>
-      <button
-        onClick={() => selectedSteps((prev: number) => Math.max(prev - 1, 0))}
-        disabled={activeStep === 0}
-      >
-        Previous
-      </button>
-      <button
-        onClick={() => selectedSteps((prev: number) => Math.min(prev + 1, 3))}
-        disabled={activeStep === 3}
-      >
-        Next
-      </button>
     </>
   );
 };

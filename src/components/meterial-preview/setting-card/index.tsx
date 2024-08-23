@@ -3,19 +3,11 @@ import { I_FeaturesElements, I_Products } from "@/utils/Interfaces/Products";
 import Selections from "./selections"
 import Activites from "./activites"
 
-import { ActiveProducts, DefaultProducts } from "@/utils/products-array"
-
-
-// createDefaultProductsCollection();
-// createActiveProductsCollection();
-// createFeaturesElementsCollection();
-
-// import { createActiveProductsCollection, createDefaultProductsCollection, createFeaturesElementsCollection } from "@/services/firebase/CreateCollection";
-
 interface I_Props {
     ActiveProducts: I_Products[];
     DefaultProducts: I_Products[];
     FeaturesElements: I_FeaturesElements[];
+    selectedKitchenType: any
 }
 
 const SettingCard = (props: I_Props) => {

@@ -13,6 +13,11 @@ import LocationPick from "../../../public/svgs/location-pick";
 import dynamic from "next/dynamic";
 import StepDetails from "@/components/step-details";
 
+const MainSteppers = dynamic(() => import("@/components/steppers"), {
+  ssr: false,
+});
+
+
 const MaterialPreview = () => {
   const [products, setProducts] = useState<I_Products[]>([]);
   const [activeProducts, setActiveProducts] = useState<I_Products[]>([]);
@@ -20,36 +25,57 @@ const MaterialPreview = () => {
   const [featuresElements, setFeaturesElements] = useState<
     I_FeaturesElements[]
   >([]);
+  
 
   const [visualizerDesignElements, setVisualizerDesignElements] = useState<
     I_VisualizerDesign[]
   >([]);
 
-  const [currentStep, setCurrentStep] = useState(0); // Start at step 1
+  const [currentStep, setCurrentStep] = useState<number>(2); // Start at step 1
 
-  const MainSteppers = dynamic(() => import("@/components/steppers"), {
-    ssr: false,
+
+  const [selectedKitchenType, setSelectedKitchenType] = useState<any>({
+    kitchen_layout: false,
+    cabinet_selection: false,
+    counterTop_selection: false,
+    plumbing_fixture: false,
   });
 
-  const selectedStepsHandler = (step: number) => {
-    // if (step >= 0 && step <= 4) {
-      setCurrentStep(step);
-    // }
+  const setSelectedKitchenTypeHandler = (selectedOption: string) => {
+    if (selectedOption === "kitchen_layout") {
+      setSelectedKitchenType({
+        kitchen_layout: true,
+        cabinet_selection: false,
+        counterTop_selection: false,
+        plumbing_fixture: false,
+      });
+    } else if (selectedOption === "cabinet_selection") {
+      setSelectedKitchenType({
+        cabinet_selection: true,
+        counterTop_selection: false,
+        plumbing_fixture: false,
+        kitchen_layout: true,
+      });
+    } else if (selectedOption === "counterTop_selection") {
+      setSelectedKitchenType({
+        counterTop_selection: true,
+        cabinet_selection: false,
+        plumbing_fixture: false,
+        kitchen_layout: true,
+      });
+    } else if (selectedOption === "plumbing_fixture") {
+      setSelectedKitchenType({
+        plumbing_fixture: true,
+        cabinet_selection: false,
+        counterTop_selection: false,
+        kitchen_layout: true,
+      });
+    }
   };
 
-  // Render different content based on the current step
-  const renderStepContent = (step: number) => {
-    switch (step) {
-      case 1:
-        return <div>Step 1: Personal Information</div>;
-      case 2:
-        return <div>Step 2: Address Details</div>;
-      case 3:
-        return <div>Step 3: Payment Information</div>;
-      case 4:
-        return <div>Step 4: Review and Submit</div>;
-      default:
-        return null;
+  const selectedStepsHandler = (step: number) => {
+    if (step >= 0 && step <= 3) {
+      setCurrentStep(step);
     }
   };
 
@@ -100,19 +126,32 @@ const MaterialPreview = () => {
       });
   }, []);
 
-  console.log("currentStep: ", currentStep);
-  
-
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
-      <MainSteppers activeStep={currentStep} selectedSteps={selectedStepsHandler} />
-      {/* <MainSteppers stepLabels={topStepLabels}/> */}
-      <StepDetails />
-      <SettingCard
-        ActiveProducts={activeProducts}
-        DefaultProducts={defaultProducts}
-        FeaturesElements={featuresElements}
+      <MainSteppers
+        activeStep={currentStep}
+        selectedSteps={selectedStepsHandler}
       />
+
+      {visualizerDesignElements.length ? (
+        <StepDetails
+          currentStep={currentStep}
+          visualizerDesignElements={visualizerDesignElements}
+          setSelectedKitchenType={setSelectedKitchenTypeHandler}
+          selectedKitchenType={selectedKitchenType}
+        />
+      ) : null}
+
+      {selectedKitchenType.cabinet_selection ? (
+        <SettingCard
+          ActiveProducts={activeProducts}
+          DefaultProducts={defaultProducts}
+          FeaturesElements={featuresElements}
+
+          selectedKitchenType={selectedKitchenType}
+        />
+      ) : null}
+
       <ImageSlider products={products} />
       <button
         title="map"
