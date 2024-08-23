@@ -70,3 +70,11 @@
     width: 100%;
     rotate: 180deg
 }
+
+.cabinet-fadeIn {
+    opacity: 1;
+}
+
+.cabinet-fadeOut {
+    opacity: 0;
+}

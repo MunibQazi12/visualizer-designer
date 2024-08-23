@@ -140,14 +140,12 @@ const MaterialPreview = () => {
           />
         ) : null}
 
-        {selectedKitchenType.cabinet_selection ? (
           <SettingCard
             ActiveProducts={activeProducts}
             DefaultProducts={defaultProducts}
             FeaturesElements={featuresElements}
             selectedKitchenType={selectedKitchenType}
           />
-        ) : null}
       </div>
       <ImageSlider products={products} />
       <button

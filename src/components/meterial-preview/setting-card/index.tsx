@@ -12,10 +12,10 @@ interface I_Props {
 
 const SettingCard = (props: I_Props) => {
 
-    const {ActiveProducts, DefaultProducts, FeaturesElements } = props;
+    const {ActiveProducts, DefaultProducts, FeaturesElements, selectedKitchenType } = props;
     
     return (
-        <div className='flex justify-end pr-[33px]'>
+        <div className={`flex justify-end pr-[33px] transition ease-in-out duration-300 ${selectedKitchenType.cabinet_selection ? 'cabinet-fadeIn' : 'cabinet-fadeOut'}`}>
             <div className='bg-customWhite-600 mr-4 2xl:w-[414px] p-4 rounded-md'>
                 <p className='text-primary-100 font-semibold 2xl:text-[3.058103975535168vh] text-[2.7522935779816513vh]'>Cabinet Options</p>
                 <Selections title="Active Selections" products={ActiveProducts} />
