@@ -107,12 +107,14 @@ const MaterialPreview = () => {
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
       <MainSteppers activeStep={currentStep} selectedSteps={selectedStepsHandler} />
       {/* <MainSteppers stepLabels={topStepLabels}/> */}
-      <StepDetails />
-      <SettingCard
-        ActiveProducts={activeProducts}
-        DefaultProducts={defaultProducts}
-        FeaturesElements={featuresElements}
-      />
+      <div className="flex justify-between">
+        <StepDetails />
+        <SettingCard
+          ActiveProducts={activeProducts}
+          DefaultProducts={defaultProducts}
+          FeaturesElements={featuresElements}
+        />
+      </div>
       <ImageSlider products={products} />
       <button
         title="map"
