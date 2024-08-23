@@ -17,7 +17,6 @@ const MainSteppers = dynamic(() => import("@/components/steppers"), {
   ssr: false,
 });
 
-
 const MaterialPreview = () => {
   const [products, setProducts] = useState<I_Products[]>([]);
   const [activeProducts, setActiveProducts] = useState<I_Products[]>([]);
@@ -25,14 +24,12 @@ const MaterialPreview = () => {
   const [featuresElements, setFeaturesElements] = useState<
     I_FeaturesElements[]
   >([]);
-  
 
   const [visualizerDesignElements, setVisualizerDesignElements] = useState<
     I_VisualizerDesign[]
   >([]);
 
-  const [currentStep, setCurrentStep] = useState<number>(2); // Start at step 1
-
+  const [currentStep, setCurrentStep] = useState<number>(0); // Start at step 1
 
   const [selectedKitchenType, setSelectedKitchenType] = useState<any>({
     kitchen_layout: false,
@@ -54,21 +51,21 @@ const MaterialPreview = () => {
         cabinet_selection: true,
         counterTop_selection: false,
         plumbing_fixture: false,
-        kitchen_layout: true,
+        kitchen_layout: false,
       });
     } else if (selectedOption === "counterTop_selection") {
       setSelectedKitchenType({
         counterTop_selection: true,
         cabinet_selection: false,
         plumbing_fixture: false,
-        kitchen_layout: true,
+        kitchen_layout: false,
       });
     } else if (selectedOption === "plumbing_fixture") {
       setSelectedKitchenType({
         plumbing_fixture: true,
         cabinet_selection: false,
         counterTop_selection: false,
-        kitchen_layout: true,
+        kitchen_layout: false,
       });
     }
   };
@@ -134,25 +131,24 @@ const MaterialPreview = () => {
       />
 
       <div className="flex justify-between">
-      {visualizerDesignElements.length ? (
-        <StepDetails
-          currentStep={currentStep}
-          visualizerDesignElements={visualizerDesignElements}
-          setSelectedKitchenType={setSelectedKitchenTypeHandler}
-          selectedKitchenType={selectedKitchenType}
-        />
-      ) : null}
+        {visualizerDesignElements.length ? (
+          <StepDetails
+            currentStep={currentStep}
+            visualizerDesignElements={visualizerDesignElements}
+            setSelectedKitchenType={setSelectedKitchenTypeHandler}
+            selectedKitchenType={selectedKitchenType}
+          />
+        ) : null}
 
-      {selectedKitchenType.cabinet_selection ? (
-        <SettingCard
-          ActiveProducts={activeProducts}
-          DefaultProducts={defaultProducts}
-          FeaturesElements={featuresElements}
-
-          selectedKitchenType={selectedKitchenType}
-        />
-      ) : null}
-    </div>
+        {selectedKitchenType.cabinet_selection ? (
+          <SettingCard
+            ActiveProducts={activeProducts}
+            DefaultProducts={defaultProducts}
+            FeaturesElements={featuresElements}
+            selectedKitchenType={selectedKitchenType}
+          />
+        ) : null}
+      </div>
       <ImageSlider products={products} />
       <button
         title="map"
