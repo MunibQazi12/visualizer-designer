@@ -2,7 +2,11 @@
 
 import SettingCard from "./setting-card";
 import ImageSlider from "./slider";
-import { I_FeaturesElements, I_Products } from "@/utils/Interfaces/Products";
+import {
+  I_FeaturesElements,
+  I_Products,
+  I_VisualizerDesign,
+} from "@/utils/Interfaces/Products";
 import { useEffect, useState } from "react";
 import Products from "@/services/firebase/products";
 import LocationPick from "../../../public/svgs/location-pick";
@@ -17,9 +21,37 @@ const MaterialPreview = () => {
     I_FeaturesElements[]
   >([]);
 
+  const [visualizerDesignElements, setVisualizerDesignElements] = useState<
+    I_VisualizerDesign[]
+  >([]);
+
+  const [currentStep, setCurrentStep] = useState(0); // Start at step 1
+
   const MainSteppers = dynamic(() => import("@/components/steppers"), {
     ssr: false,
   });
+
+  const selectedStepsHandler = (step: number) => {
+    // if (step >= 0 && step <= 4) {
+      setCurrentStep(step);
+    // }
+  };
+
+  // Render different content based on the current step
+  const renderStepContent = (step: number) => {
+    switch (step) {
+      case 1:
+        return <div>Step 1: Personal Information</div>;
+      case 2:
+        return <div>Step 2: Address Details</div>;
+      case 3:
+        return <div>Step 3: Payment Information</div>;
+      case 4:
+        return <div>Step 4: Review and Submit</div>;
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     Products.fetchProducts("products")
@@ -57,14 +89,23 @@ const MaterialPreview = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    Products.fetchProducts("visualizerDesign")
+      .then((data) => {
+        const products: I_VisualizerDesign[] = data;
+        setVisualizerDesignElements(products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  const stepLabels = [{ label: "Exterior" }, { label: "1st Floor" }, { label: "2nd Floor" }, { label: "Review" }];
-  const topStepLabels = [{ label: "" }, { label: "" }, { label: "" }, { label: "" }];
+  console.log("currentStep: ", currentStep);
+  
 
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
-      <MainSteppers stepLabels={stepLabels} activeStep={1}/>
+      <MainSteppers activeStep={currentStep} selectedSteps={selectedStepsHandler} />
       {/* <MainSteppers stepLabels={topStepLabels}/> */}
       <StepDetails />
       <SettingCard
