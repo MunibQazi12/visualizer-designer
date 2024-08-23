@@ -28,7 +28,7 @@ const featureImageHandler = (featuresImage: string) => {
 const Activites = (props: I_Props) => {
   const { FeaturesElements } = props;
   return (
-    <div className="flex flex-col justify-center items-center gap-[26px] mr-[110px]">
+    <div className="flex flex-col justify-center items-center gap-[26px]">
       {FeaturesElements.map((info) => {
         const { featuresImage, id } = info;
         return (

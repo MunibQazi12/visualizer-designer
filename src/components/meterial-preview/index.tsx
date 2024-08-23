@@ -133,6 +133,7 @@ const MaterialPreview = () => {
         selectedSteps={selectedStepsHandler}
       />
 
+      <div className="flex justify-between">
       {visualizerDesignElements.length ? (
         <StepDetails
           currentStep={currentStep}
@@ -151,7 +152,7 @@ const MaterialPreview = () => {
           selectedKitchenType={selectedKitchenType}
         />
       ) : null}
-
+    </div>
       <ImageSlider products={products} />
       <button
         title="map"

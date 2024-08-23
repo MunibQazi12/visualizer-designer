@@ -15,7 +15,7 @@ const SettingCard = (props: I_Props) => {
     const {ActiveProducts, DefaultProducts, FeaturesElements } = props;
     
     return (
-        <div className='w-full flex justify-end 2xl:mt-[9.232415902140673vh] mt-[6.339449541284404vh]'>
+        <div className='flex justify-end pr-[33px]'>
             <div className='bg-customWhite-600 mr-4 2xl:w-[414px] p-4 rounded-md'>
                 <p className='text-primary-100 font-semibold 2xl:text-[3.058103975535168vh] text-[2.7522935779816513vh]'>Cabinet Options</p>
                 <Selections title="Active Selections" products={ActiveProducts} />
