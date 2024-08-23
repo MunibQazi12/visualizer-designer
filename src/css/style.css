@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.mainStepper {
+    padding: 41px 24px !important;
+    width: 100%;
+    max-width: 672px;
+    margin: 0 auto;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 button {
+    width: 23px;
+    height: 23px;
+    position: relative;
+    background-color: white;
+}
+
+.mainStepper .StepContainer-0-2-2 {
+    padding: 0;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 button.completed {
+    background: #70C23E;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 button.active {
+    background: #70C23E;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 button.active::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 button span {
+    display: none;
+}
+
+.mainStepper .StepContainer-0-2-2 .StepMain-0-2-3 .LabelContainer-0-2-10 span {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin-top: 9px;
+}
+
+.mainStepper .ConnectorContainer-0-2-20 {
+    top: calc(1em - 5px);
+    left: calc(-58% + 2em - -6px);
+    right: calc(50% + 2em - 6px);
+}
+
+.mainStepper .ConnectorContainer-0-2-20 .Connector-0-2-21 {
+    border-color: white;
+}
