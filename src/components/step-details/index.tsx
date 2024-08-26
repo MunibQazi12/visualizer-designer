@@ -143,7 +143,7 @@ const StepDetails = (props: I_Props) => {
     return (
       <div
         key={"visualizeElements" + index}
-        className="w-full max-w-[348px] ml-9 relative step-detail-container h-full max-h-[530px] overflow-auto rounded-[20px]"
+        className="w-full max-w-[348px] ml-9 relative step-detail-container h-full max-h-[530px] overflow-auto rounded-[20px] scrollBar-hidden"
       >
         {data.dinningRoom.dining_layout ? (
           <Card className="stepper-detail-dropdown-open completed">

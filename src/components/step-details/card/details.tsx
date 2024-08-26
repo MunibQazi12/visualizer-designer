@@ -8,7 +8,7 @@ interface I_Props {
 const CardDetails = (props: I_Props) => {
   return (
     <div
-      className={`${props.className}`}
+      className={`mt-4 ${props.className}`}
     >
       {props.children}
     </div>

@@ -16,14 +16,14 @@ const GreatRoom = (props: I_Props) => {
     <>
       <CardHeader
         name="Great Room"
-        className={`${accordion.greatRoom.value ? 'show' : 'hide'}`}
+        className={`${accordion.greatRoom.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"greatRoom"}
       />
 
-      <div className="mt-4 pl-5">
-        <CardDetails  className={`${accordion.greatRoom.value ? "show" : "hide"}`}>
+      <div className="pl-5">
+        <CardDetails  className={`${accordion.greatRoom.value ? "show" : "hidden"}`}>
           <>
             {greatRoom.great_room_layout ? (
               <CardSingleItem name="Great Room Layout" />

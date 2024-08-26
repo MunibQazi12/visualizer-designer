@@ -17,14 +17,14 @@ const OwnerBath = (props: I_Props) => {
     <>
       <CardHeader
         name="Owners Bath"
-        className={`${accordion.ownersBath.value ? 'show' : 'hide'}`}
+        className={`${accordion.ownersBath.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"ownersBath"}
       />
 
-      <div className="mt-4 pl-5">
-        <CardDetails className={`${accordion.ownersBath.value ? 'show' : 'hide'}`}>
+      <div className="pl-5">
+        <CardDetails className={`${accordion.ownersBath.value ? 'show' : 'hidden'}`}>
           <>
             {ownersBath.owner_bath_layout ? (
               <CardSingleItem name="Owner Bath Layout" />

@@ -18,14 +18,14 @@ const MudRoom = (props: I_Props) => {
     <>
       <CardHeader
         name="Mud Room"
-        className={`${accordion.mudRoom.value ? 'show' : 'hide'}`}
+        className={`${accordion.mudRoom.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"mudRoom"}
       />
 
-      <div className="mt-4 pl-5">
-        <CardDetails className={`${accordion.mudRoom.value ? 'show' : 'hide'}`}>
+      <div className="pl-5">
+        <CardDetails className={`${accordion.mudRoom.value ? 'show' : 'hidden'}`}>
           <>
             {mudRoom.mudroom_layout ? (
               <CardSingleItem name="Mud Room Layout" />
