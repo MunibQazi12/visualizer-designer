@@ -45,42 +45,42 @@ const StepDetails = (props: I_Props) => {
         key={"visualizeElements" + index}
         className="w-full max-w-[348px] ml-9 relative step-detail-container"
       >
-        {data.dinningRoom.diningTable ? (
+        {data.dinningRoom.dining_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <DiningRoom />
+            <DiningRoom dinningRoom={data.dinningRoom} />
           </Card>
         ) : null}
 
-        {data.greatRoom.sideTables ? (
+        {data.greatRoom.great_room_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <GreatRoom />
+            <GreatRoom  greatRoom = {data.greatRoom}/>
           </Card>
         ) : null}
 
         <Card className="stepper-detail-dropdown-open completed">
-          <Kitchen 
+          <Kitchen
             selectedKitchenType={selectedKitchenType}
             setSelectedKitchenType={setSelectedKitchenType}
           />
         </Card>
 
-        <Card className="stepper-detail-dropdown-open completed">
-          <GreatRoom />
-        </Card>
-
-        <Card className="stepper-detail-dropdown-open completed">
-          <OwnerSuit />
-        </Card>
-
-        {data.ownersBath.shampooHolder ? (
+        {data.ownerSuit?.owner_suit_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <OwnerBath />
+            <OwnerSuit ownerSuit={data.ownerSuit}/>
           </Card>
         ) : null}
 
-        <Card className="stepper-detail-dropdown-open completed">
-          <MudRoom />
-        </Card>
+        {data.ownersBath.owner_bath_layout ? (
+          <Card className="stepper-detail-dropdown-open completed">
+            <OwnerBath ownersBath={data.ownersBath}/>
+          </Card>
+        ) : null}
+
+        {data.mudRoom.mudroom_layout ? (
+          <Card className="stepper-detail-dropdown-open completed">
+            <MudRoom mudRoom={data.mudRoom}/>
+          </Card>
+        ) : null}
 
         <ScrollDownSvg />
         <div className="more-data-scroll"></div>

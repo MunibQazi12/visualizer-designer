@@ -16,12 +16,105 @@ interface DiningRoom {
   utensils: boolean;
 }
 
+interface ExtDiningLayout {
+  oneWallKitchen: boolean;
+  galleyKitchen: boolean;
+  lShapedKitchen: boolean;
+  horseShoeKitchen: boolean;
+}
+
+interface ExtShelvingLayout {
+  racks: boolean;
+  boxes: boolean;
+  screws: boolean;
+}
+
+interface ExtStairsLayout {
+  standardHeight: boolean;
+  standardWidth: boolean;
+  customPlain: boolean;
+}
+
+interface ExtSeatingArea {
+  sofa: boolean;
+  Table: boolean;
+  bed: boolean;
+  chair: boolean;
+}
+
+export interface ExteriorDiningRoom {
+  dining_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+  shelvings: ExtShelvingLayout;
+  stairs: ExtStairsLayout;
+  seating_area: ExtSeatingArea;
+  display: boolean;
+
+}
+
+interface FirstFloorDiningRoom {
+  dining_layout: ExtDiningLayout;
+  shelvings: ExtShelvingLayout;
+  stairs: ExtStairsLayout;
+  display: boolean;
+
+}
+
+interface SecondFloorDiningRoom {
+  dining_layout: ExtDiningLayout;
+  stairs: ExtStairsLayout;
+  seating_area: ExtSeatingArea;
+  display: boolean;
+
+}
+
+interface ReviewDiningRoom {
+  dining_layout: ExtDiningLayout,
+  shelvings: ExtShelvingLayout,
+  seating_area: ExtSeatingArea,
+  display: boolean;
+
+}
+
+
+
 interface GreatRoom {
   bed: boolean;
   sideTables: boolean;
   dressing: boolean;
   wardrobe: boolean;
 }
+
+interface ExtJacuzziArea {
+  standardHeight: boolean;
+  standardWidth: boolean;
+  customPlain: boolean;
+}
+
+export interface ExteriorGreatRoom {
+  great_room_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+  seating_area: ExtSeatingArea;
+}
+
+interface FirstFloorGreatRoom {
+  great_room_layout: ExtDiningLayout;
+  seating_area: ExtSeatingArea;
+}
+
+interface SecondFloorGreatRoom {
+  great_room_layout: ExtDiningLayout,
+    seating_area: ExtSeatingArea,
+}
+
+interface ReviewGreatRoom {
+  great_room_layout: ExtDiningLayout,
+  seating_area: ExtSeatingArea,
+}
+
+
+
+
 
 interface OwnersSuit {
   bed: boolean;
@@ -30,11 +123,66 @@ interface OwnersSuit {
   wardrobe: boolean;
 }
 
-interface OwnersBath {
+export interface ExteriorOwnersSuit {
+  owner_suit_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+  shelvings: ExtShelvingLayout;
+}
+
+interface FirstFloorOwnersSuit {
+  owner_suit_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+}
+
+interface SecondFloorOwnersSuit {
+  owner_suit_layout: ExtDiningLayout,
+  shelvings: ExtShelvingLayout,
+}
+
+interface ReviewOwnersSuit {
+  owner_suit_layout: ExtDiningLayout,
+  shelvings: ExtShelvingLayout,
+}
+
+
+
+
+
+
+export interface ExteriorOwnersBath {
   bathMat: boolean;
   showerCurtains: boolean;
   soapDish: boolean;
   shampooHolder: boolean;
+}
+
+interface FirstFloorOwnersBath {
+  owner_bath_layout: ExtDiningLayout;
+  shelvings: ExtShelvingLayout;
+  jacuzzi: ExtJacuzziArea;
+}
+
+
+interface SecondFloorOwnersBath {
+  owner_bath_layout: ExtDiningLayout,
+  cabinet_selection: CabinetOptions,
+  shelvings: ExtShelvingLayout,
+}
+
+interface ReviewOwnersBath {
+  owner_bath_layout: ExtDiningLayout,
+  jacuzzi: ExtJacuzziArea,
+}
+
+
+
+
+
+interface OwnersBath {
+  owner_bath_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+  shelvings: ExtShelvingLayout;
+  jacuzzi: ExtJacuzziArea;
 }
 
 interface MudRoom {
@@ -43,6 +191,27 @@ interface MudRoom {
   shoeStorage: boolean;
   seatingArea: boolean;
   petSuppliers: boolean;
+}
+
+export interface ExteriorMudRoom {
+  mudroom_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+  shelvings: ExtShelvingLayout;
+}
+
+interface FirstFloorMudRoom {
+  mudroom_layout: ExtDiningLayout;
+  cabinet_selection: CabinetOptions;
+}
+
+interface SecondFloorMudRoom {
+  mudroom_layout: ExtDiningLayout,
+  shelvings: ExtShelvingLayout,
+}
+
+interface ReviewMudRoom {
+  mudroom_layout: ExtDiningLayout,
+  shelvings: ExtShelvingLayout,
 }
 
 interface KitchenLayout {
@@ -82,23 +251,65 @@ interface CounterTopSelections {
   description: string;
 }
 
-interface visualizerDesignItems {
-  dinningRoom: DiningRoom;
-  greatRoom: GreatRoom;
+interface visualizerDesignReviewItems {
+  dinningRoom: ReviewDiningRoom;
+  greatRoom: ReviewGreatRoom;
   kitchen: {
     kitchen_layout: KitchenLayout;
     cabinet_selection: CabinetOptions;
     counterTop_selection: CounterTopSelections[];
     plumbing_fixture: PlumbingFixture;
   };
-  ownersSuit: OwnersSuit;
-  ownersBath: OwnersBath;
-  mudRoom: MudRoom;
+  ownersSuit: ReviewOwnersSuit;
+  ownersBath: ReviewOwnersBath;
+  mudRoom: ReviewMudRoom;
+}
+
+
+interface visualizerDesignExteriorItems {
+  dinningRoom: ExteriorDiningRoom;
+  greatRoom: ExteriorGreatRoom;
+  kitchen: {
+    kitchen_layout: KitchenLayout;
+    cabinet_selection: CabinetOptions;
+    counterTop_selection: CounterTopSelections[];
+    plumbing_fixture: PlumbingFixture;
+  };
+  ownersSuit: ExteriorOwnersSuit;
+  ownersBath: ExteriorOwnersBath;
+  mudRoom: ExteriorMudRoom;
+}
+
+interface visualizerDesignSecondFloorItems {
+  dinningRoom: SecondFloorDiningRoom;
+  greatRoom: SecondFloorGreatRoom;
+  kitchen: {
+    kitchen_layout: KitchenLayout;
+    cabinet_selection: CabinetOptions;
+    counterTop_selection: CounterTopSelections[];
+    plumbing_fixture: PlumbingFixture;
+  };
+  ownersSuit: SecondFloorOwnersSuit;
+  ownersBath: SecondFloorOwnersBath;
+  mudRoom: SecondFloorMudRoom;
+}
+interface visualizerDesignFirstFloorItems {
+  dinningRoom: FirstFloorDiningRoom;
+  greatRoom: FirstFloorGreatRoom;
+  kitchen: {
+    kitchen_layout: KitchenLayout;
+    cabinet_selection: CabinetOptions;
+    counterTop_selection: CounterTopSelections[];
+    plumbing_fixture: PlumbingFixture;
+  };
+  ownersSuit: FirstFloorOwnersSuit;
+  ownersBath: FirstFloorOwnersBath;
+  mudRoom: FirstFloorMudRoom;
 }
 
 export interface I_VisualizerDesign {
-  exterior: visualizerDesignItems;
-  firstFloor: visualizerDesignItems;
-  secondFloor: visualizerDesignItems;
-  review: visualizerDesignItems;
+  exterior: visualizerDesignExteriorItems;
+  firstFloor: visualizerDesignFirstFloorItems;
+  secondFloor: visualizerDesignSecondFloorItems;
+  review: visualizerDesignReviewItems;
 }

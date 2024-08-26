@@ -8,7 +8,7 @@ interface I_Props {
 const CardDetails = (props: I_Props) => {
   return (
     <div
-      className={`flex items-center ${props.className}`}
+      className={`${props.className}`}
     >
       {props.children}
     </div>

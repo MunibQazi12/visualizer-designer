@@ -1,9 +1,14 @@
 import React from 'react'
-import MapSvg from "@/../public/svgs/map";
-import EyeSvg from "@/../public/svgs/eyes";
 import AccordionCloseSvg from '@/../public/svgs/accordion-close';
+import DetailHeaderButtons from '../details-header-buttons';
+import { ExteriorMudRoom } from '@/utils/Interfaces/Products';
 
-const MudRoom = () => {
+interface I_Props {
+  mudRoom: ExteriorMudRoom
+}
+
+const MudRoom = (props: I_Props) => {
+  const {mudRoom} = props;
   return (
     <div className="flex items-center">
             <div className="w-5 h-5 rounded-full bg-gray-400 p-[5px]">
@@ -12,14 +17,7 @@ const MudRoom = () => {
             <p className="w-[calc(100%-113px)] pl-4 pr-2 text-lg font-medium leading-[30px] text-primary-100 mb-0">
               Mud Room
             </p>
-            <div className="flex items-center gap-[11px]">
-              <button type="button">
-              <MapSvg />
-              </button>
-              <button type="button">
-              <EyeSvg />
-              </button>
-            </div>
+            <DetailHeaderButtons />
             <button type="button" className="ml-6">
               <AccordionCloseSvg />
             </button>

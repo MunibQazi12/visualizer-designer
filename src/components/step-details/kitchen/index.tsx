@@ -2,6 +2,7 @@ import React from "react";
 import MapSvg from "@/../public/svgs/map";
 import EyeSvg from "@/../public/svgs/eyes";
 import AccordionOpenSvg from "@/../public/svgs/accordion-open";
+import CardDetails from "../card/details";
 
 interface I_Props {
   setSelectedKitchenType: any;
@@ -51,57 +52,62 @@ const Kitchen = (props: I_Props) => {
             Kitchen Layout
           </p>
         </div>
-        <div className="flex items-center">
-          <div
-            className={`w-4 h-4 rounded-full p-1 ${
-              selectedKitchenType.cabinet_selection
-                ? "bg-green-500"
-                : "bg-gray-400"
-            }`}
-          >
-            <span className="block w-full h-full rounded-full bg-white"></span>
-          </div>
-          <p
-            className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
-            onClick={() => setSelectedKitchenType("cabinet_selection")}
-          >
-            Cabinet Selection
-          </p>
-        </div>
-        <div className="flex items-center">
-          <div
-            className={`w-4 h-4 rounded-full p-1 ${
-              selectedKitchenType.counterTop_selection
-                ? "bg-green-500"
-                : "bg-gray-400"
-            }`}
-          >
-            <span className="block w-full h-full rounded-full bg-white"></span>
-          </div>
-          <p
-            className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
-            onClick={() => setSelectedKitchenType("counterTop_selection")}
-          >
-            Countertop Selection
-          </p>
-        </div>
-        <div className="flex items-center">
-          <div
-            className={`w-4 h-4 rounded-full  p-1 ${
-              selectedKitchenType.plumbing_fixture
-                ? "bg-green-500"
-                : "bg-gray-400"
-            }`}
-          >
-            <span className="block w-full h-full rounded-full bg-white"></span>
-          </div>
-          <p
-            className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
-            onClick={() => setSelectedKitchenType("plumbing_fixture")}
-          >
-            Plumbing Fixtures
-          </p>
-        </div>
+
+        <CardDetails className="">
+          <>
+            <div className="flex items-center">
+              <div
+                className={`w-4 h-4 rounded-full p-1 ${
+                  selectedKitchenType.cabinet_selection
+                    ? "bg-green-500"
+                    : "bg-gray-400"
+                }`}
+              >
+                <span className="block w-full h-full rounded-full bg-white"></span>
+              </div>
+              <p
+                className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
+                onClick={() => setSelectedKitchenType("cabinet_selection")}
+              >
+                Cabinet Selection
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div
+                className={`w-4 h-4 rounded-full p-1 ${
+                  selectedKitchenType.counterTop_selection
+                    ? "bg-green-500"
+                    : "bg-gray-400"
+                }`}
+              >
+                <span className="block w-full h-full rounded-full bg-white"></span>
+              </div>
+              <p
+                className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
+                onClick={() => setSelectedKitchenType("counterTop_selection")}
+              >
+                Countertop Selection
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div
+                className={`w-4 h-4 rounded-full  p-1 ${
+                  selectedKitchenType.plumbing_fixture
+                    ? "bg-green-500"
+                    : "bg-gray-400"
+                }`}
+              >
+                <span className="block w-full h-full rounded-full bg-white"></span>
+              </div>
+              <p
+                className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer"
+                onClick={() => setSelectedKitchenType("plumbing_fixture")}
+              >
+                Plumbing Fixtures
+              </p>
+            </div>
+          </>
+        </CardDetails>
       </div>
     </>
   );
