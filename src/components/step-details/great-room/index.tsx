@@ -3,28 +3,47 @@ import MapSvg from "@/../public/svgs/map";
 import EyeSvg from "@/../public/svgs/eyes";
 import AccordionCloseSvg from "@/../public/svgs/accordion-close";
 import DetailHeaderButtons from "../details-header-buttons";
-import { ExteriorGreatRoom } from "@/utils/Interfaces/Products";
-
+import { ExteriorGreatRoom, I_AccordionData } from "@/utils/Interfaces/Products";
+import CardDetails from "../card/details";
+import CardSingleItem from "../card/single-item";
+import CardHeader from "../card/card-header";
 
 interface I_Props {
-  greatRoom: ExteriorGreatRoom
+  greatRoom: ExteriorGreatRoom;
+  accordion: I_AccordionData;
+  setAccordion: (accordion_name: string) => void;
 }
 
 const GreatRoom = (props: I_Props) => {
-  const {greatRoom} = props;
+  const { greatRoom, accordion, setAccordion } = props;
   return (
-    <div className="flex items-center">
-      <div className="w-5 h-5 rounded-full bg-green-500 p-[5px]">
-        <span className="block w-full h-full rounded-full bg-white"></span>
+    <>
+      <CardHeader
+        name="Great Room"
+        className={`${accordion.greatRoom.value ? 'show' : 'hide'}`}
+        accordion={accordion}
+        setAccordion={setAccordion}
+        label={"greatRoom"}
+      />
+
+      <div className="mt-4 pl-5">
+        <CardDetails  className={`${accordion.greatRoom.value ? "show" : "hide"}`}>
+          <>
+            {greatRoom.great_room_layout ? (
+              <CardSingleItem name="Great Room Layout" />
+            ) : null}
+
+            {greatRoom.cabinet_selection ? (
+              <CardSingleItem name="Cabinet Selection" />
+            ) : null}
+
+            {greatRoom.seating_area ? (
+              <CardSingleItem name="Seating Area" />
+            ) : null}
+          </>
+        </CardDetails>
       </div>
-      <p className="w-[calc(100%-113px)] pl-4 pr-2 text-lg font-medium leading-[30px] text-primary-100 mb-0">
-        Great Room
-      </p>
-      <DetailHeaderButtons />
-      <button type="button" className="ml-6">
-        <AccordionCloseSvg />
-      </button>
-    </div>
+    </>
   );
 };
 

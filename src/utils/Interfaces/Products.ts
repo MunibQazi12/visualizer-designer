@@ -97,6 +97,12 @@ export interface ExteriorGreatRoom {
   seating_area: ExtSeatingArea;
 }
 
+export interface ExteriorKitchen {
+    kitchen_layout: KitchenLayout;
+    cabinet_selection: CabinetOptions;
+    counterTop_selection: CounterTopSelections[];
+    plumbing_fixture: PlumbingFixture;
+}
 interface FirstFloorGreatRoom {
   great_room_layout: ExtDiningLayout;
   seating_area: ExtSeatingArea;
@@ -150,10 +156,10 @@ interface ReviewOwnersSuit {
 
 
 export interface ExteriorOwnersBath {
-  bathMat: boolean;
-  showerCurtains: boolean;
-  soapDish: boolean;
-  shampooHolder: boolean;
+  owner_bath_layout: ExtDiningLayout,
+  cabinet_selection: CabinetOptions,
+  shelvings: ExtShelvingLayout,
+  jacuzzi: ExtJacuzziArea,
 }
 
 interface FirstFloorOwnersBath {
@@ -269,12 +275,7 @@ interface visualizerDesignReviewItems {
 interface visualizerDesignExteriorItems {
   dinningRoom: ExteriorDiningRoom;
   greatRoom: ExteriorGreatRoom;
-  kitchen: {
-    kitchen_layout: KitchenLayout;
-    cabinet_selection: CabinetOptions;
-    counterTop_selection: CounterTopSelections[];
-    plumbing_fixture: PlumbingFixture;
-  };
+  kitchen: ExteriorKitchen;
   ownersSuit: ExteriorOwnersSuit;
   ownersBath: ExteriorOwnersBath;
   mudRoom: ExteriorMudRoom;
@@ -312,4 +313,31 @@ export interface I_VisualizerDesign {
   firstFloor: visualizerDesignFirstFloorItems;
   secondFloor: visualizerDesignSecondFloorItems;
   review: visualizerDesignReviewItems;
+}
+
+export interface I_AccordionData {
+  dinningRoom: {
+    label: string,
+    value: boolean,
+  },
+  greatRoom: {
+    label: string,
+    value: boolean,
+  },
+  kitchen: {
+    label: string,
+    value: boolean,
+  },
+  ownersSuit: {
+    label: string,
+    value: boolean,
+  },
+  ownersBath: {
+    label: string,
+    value: boolean,
+  },
+  mudRoom: {
+    label: string,
+    value: boolean,
+  },
 }
