@@ -22,7 +22,7 @@ const CardHeader = (props: I_Props) => {
         {name}
       </p>
       <DetailHeaderButtons />
-      <button type="button" className="ml-6 group" onClick={() => setAccordion(label)}>
+      <button type="button" className={`ml-6 group ${className}`} onClick={() => setAccordion(label)}>
            <AccordionCloseSvg />
       </button>
     </div>

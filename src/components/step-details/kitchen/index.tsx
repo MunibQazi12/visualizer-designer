@@ -1,10 +1,6 @@
 import React from "react";
-import MapSvg from "@/../public/svgs/map";
-import EyeSvg from "@/../public/svgs/eyes";
-import AccordionOpenSvg from "@/../public/svgs/accordion-open";
 import CardDetails from "../card/details";
 import { ExteriorKitchen, I_AccordionData } from "@/utils/Interfaces/Products";
-import DetailHeaderButtons from "../details-header-buttons";
 import CardHeader from "../card/card-header";
 
 interface I_Props {

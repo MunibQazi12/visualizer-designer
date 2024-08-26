@@ -9,6 +9,7 @@ import Kitchen from "@/components/step-details/kitchen";
 import ScrollDownSvg from "@/../public/svgs/scroll-down";
 import { useState } from "react";
 import { I_AccordionData } from "@/utils/Interfaces/Products";
+import { accordionData } from "@/utils";
 
 interface I_Props {
   visualizerDesignElements: I_VisualizerDesign[];
@@ -17,34 +18,6 @@ interface I_Props {
   selectedKitchenType: any;
 }
 
-
-
-const accordionData = {
-  dinningRoom: {
-    label: "dinningRoom",
-    value: true,
-  },
-  greatRoom: {
-    label: "greatRoom",
-    value: false,
-  },
-  kitchen: {
-    label: "kitchen",
-    value: false,
-  },
-  ownersSuit: {
-    label: "ownersSuit",
-    value: false,
-  },
-  ownersBath: {
-    label: "ownersBath",
-    value: false,
-  },
-  mudRoom: {
-    label: "mudRoom",
-    value: false,
-  },
-}
 
 const StepDetails = (props: I_Props) => {
   const {
@@ -67,6 +40,7 @@ const StepDetails = (props: I_Props) => {
       return [visualizerDesignElements[0]?.review];
     }
   };
+
 
   const setAccordionToShowHandler = (value: string) => {
     console.log('value: ', value);
@@ -133,11 +107,10 @@ const StepDetails = (props: I_Props) => {
     } 
 
   }
-  
+
+
 
   const visualizeElements: any = selectDataToDisplay();
-
-  console.log("accordionToShow: ", accordionToShow);
 
   return visualizeElements.map((data: any, index: number) => {
     return (
