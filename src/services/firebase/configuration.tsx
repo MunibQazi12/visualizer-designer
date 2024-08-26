@@ -8,14 +8,14 @@ import { get, getDatabase, ref } from "firebase/database";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJjwjqhSy_S3jFTHkZAX_g24Lt92OpQjA",
-  authDomain: "visulizer-designer.firebaseapp.com",
-  databaseURL: "https://visulizer-designer-default-rtdb.firebaseio.com",
-  projectId: "visulizer-designer",
-  storageBucket: "visulizer-designer.appspot.com",
-  messagingSenderId: "411116293551",
-  appId: "1:411116293551:web:232796ad04cc7b449a335a",
-  measurementId: "G-0NY7SZGG7P",
+  apiKey: process.env.NEXT_PUBLIC_DATABASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_DATABASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_DATABASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_DATABASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_DATABASE_MESSAGING_SENDER_ID,
+  appId:process.env.NEXT_PUBLIC_DATABASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_DATABASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
