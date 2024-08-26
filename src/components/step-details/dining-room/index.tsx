@@ -25,13 +25,13 @@ const DiningRoom = (props: I_Props) => {
     <>
       <CardHeader
         name="Dining Room"
-        className={`${accordion.dinningRoom.value ? 'show' : 'hide'}`}
+        className={`${accordion.dinningRoom.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"dinningRoom"}
       />
 
-      <div className="mt-4 pl-5">
+      <div className="pl-5">
         <CardDetails
           className={`${accordion.dinningRoom.value ? "show" : "hidden"}`}
         >

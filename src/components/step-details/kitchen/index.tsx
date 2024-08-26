@@ -18,14 +18,14 @@ const Kitchen = (props: I_Props) => {
     <>
       <CardHeader
         name="Kitchen"
-        className={`${accordion.kitchen.value ? 'show' : 'hide'}`}
+        className={`${accordion.kitchen.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"kitchen"}
       />
 
-      <div className="mt-4 pl-5">
-        <CardDetails className={`${accordion.kitchen.value ? 'show' : 'hide'}`}>
+      <div className="pl-5">
+        <CardDetails className={`${accordion.kitchen.value ? 'show' : 'hidden'}`}>
           <>
             {kitchen.kitchen_layout ? (
               <div className="inline-flex items-center">

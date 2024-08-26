@@ -4,7 +4,7 @@ import EyeSvg from "@/../public/svgs/eyes";
 
 const DetailHeaderButtons = () => {
   return (
-    <div className="flex items-center gap-[11px]">
+    <div className="flex items-center gap-[11px] mr-6">
         <button type="button">
           <MapSvg />
         </button>

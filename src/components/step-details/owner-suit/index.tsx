@@ -16,14 +16,14 @@ const OwnerSuit = (props: I_Props) => {
     <>
       <CardHeader
         name="Owners Suite"
-        className={`${accordion.ownersSuit.value ? 'show' : 'hide'}`}
+        className={`${accordion.ownersSuit.value ? 'rotate-90' : ''}`}
         accordion={accordion}
         setAccordion={setAccordion}
         label={"ownersSuit"}
       />
 
-      <div className="mt-4 pl-5">
-        <CardDetails className={`${accordion.ownersSuit.value ? 'show' : 'hide'}`}>
+      <div className="pl-5">
+        <CardDetails className={`${accordion.ownersSuit.value ? 'show' : 'hidden'}`}>
           <>
             {ownersSuit.owner_suit_layout ? (
               <CardSingleItem name="Owner Suit Layout" />
