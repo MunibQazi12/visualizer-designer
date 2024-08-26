@@ -70,7 +70,7 @@ const StepDetails = (props: I_Props) => {
 
   const setAccordionToShowHandler = (value: string) => {
     console.log('value: ', value);
-    if(value === 'dinningRoom') {
+    if(value === accordionData.dinningRoom.label) {
       setAccordionToShow((prev: I_AccordionData) => {
         return {
           ...prev,
@@ -80,17 +80,57 @@ const StepDetails = (props: I_Props) => {
           }
         }
       });
-    } else  if(value === 'greatRoom') {
+    } else  if(value === accordionData.greatRoom.label) {
       setAccordionToShow((prev: I_AccordionData) => {
         return {
           ...prev,
           greatRoom: {
-            label: prev.dinningRoom.label,
+            label: prev.greatRoom.label,
             value: !prev.greatRoom.value
           }
         }
       });
-    }
+    } else  if(value === accordionData.kitchen.label) {
+      setAccordionToShow((prev: I_AccordionData) => {
+        return {
+          ...prev,
+          kitchen: {
+            label: prev.kitchen.label,
+            value: !prev.kitchen.value
+          }
+        }
+      });
+    } else  if(value === accordionData.ownersSuit.label) {
+      setAccordionToShow((prev: I_AccordionData) => {
+        return {
+          ...prev,
+          ownersSuit: {
+            label: prev.ownersSuit.label,
+            value: !prev.ownersSuit.value
+          }
+        }
+      });
+    } else  if(value === accordionData.ownersBath.label) {
+      setAccordionToShow((prev: I_AccordionData) => {
+        return {
+          ...prev,
+          ownersBath: {
+            label: prev.ownersBath.label,
+            value: !prev.ownersBath.value
+          }
+        }
+      });
+    } else  if(value === accordionData.mudRoom.label) {
+      setAccordionToShow((prev: I_AccordionData) => {
+        return {
+          ...prev,
+          mudRoom: {
+            label: prev.mudRoom.label,
+            value: !prev.mudRoom.value
+          }
+        }
+      });
+    } 
 
   }
   
@@ -123,25 +163,27 @@ const StepDetails = (props: I_Props) => {
               selectedKitchenType={selectedKitchenType}
               setSelectedKitchenType={setSelectedKitchenType}
               kitchen={data.kitchen}
+              accordion={accordionToShow} 
+              setAccordion={setAccordionToShowHandler}
             />
           </Card>
         ) : null}
 
         {data.ownersSuit.owner_suit_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <OwnerSuit ownerSuit={data.ownersSuit} />
+            <OwnerSuit ownersSuit={data.ownersSuit} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.ownersBath.owner_bath_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <OwnerBath ownersBath={data.ownersBath} />
+            <OwnerBath ownersBath={data.ownersBath} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.mudRoom.mudroom_layout ? (
           <Card className="stepper-detail-dropdown-open completed">
-            <MudRoom mudRoom={data.mudRoom} />
+            <MudRoom mudRoom={data.mudRoom} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 

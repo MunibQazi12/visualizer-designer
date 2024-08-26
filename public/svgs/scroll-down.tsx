@@ -13,8 +13,8 @@ const ScrollDownSvg = () => {
       <path
         d="M36 3L19.3493 14M3 3L19.0541 13.7481"
         stroke="white"
-        stroke-width="5"
-        stroke-linecap="round"
+        strokeWidth="5"
+        strokeLinecap="round"
       />
     </svg>
   );

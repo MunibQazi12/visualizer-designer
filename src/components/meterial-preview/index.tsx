@@ -184,11 +184,11 @@ const MaterialPreview = () => {
       >
         <LocationPick />
       </button>
-      <div className="w-[369px] h-[302px] bg-white rounded-[20px] absolute left-[62px] bottom-[73px]">
+      {/* <div className="w-[369px] h-[302px] bg-white rounded-[20px] absolute left-[62px] bottom-[73px]">
         <div className="flex justify-end items-center gap-[26px] pt-[22px] px-[21px]">
           <button type="button">
             <svg width="30" height="5" viewBox="0 0 30 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 2.5H27" stroke="#5C5C5C" stroke-width="5" stroke-linecap="round"/>
+              <path d="M3 2.5H27" stroke="#5C5C5C" strokeWidth="5" strokeLinecap="round"/>
             </svg>
           </button>
           <button type="button">
@@ -200,7 +200,7 @@ const MaterialPreview = () => {
         <div className="pr-[11px] pl-[15px] pb-10">
           <Image src={Map} alt="Map" />
         </div>
-      </div>
+      </div> */}
       {/* View all modal start */}
         {/* <div className="w-full max-w-[1177px] h-screen px-2.5 mx-auto rounded-xl absolute top-0 left-0 right-0 flex justify-center items-center">
           <div className="w-full bg-white rounded-2xl h-full max-h-[802px]">

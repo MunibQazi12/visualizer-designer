@@ -3,36 +3,33 @@ import MapSvg from "@/../public/svgs/map";
 import EyeSvg from "@/../public/svgs/eyes";
 import AccordionOpenSvg from "@/../public/svgs/accordion-open";
 import CardDetails from "../card/details";
-import { ExteriorKitchen } from "@/utils/Interfaces/Products";
-// import CardSingleItem from "../card/single-item";
+import { ExteriorKitchen, I_AccordionData } from "@/utils/Interfaces/Products";
 import DetailHeaderButtons from "../details-header-buttons";
+import CardHeader from "../card/card-header";
 
 interface I_Props {
   setSelectedKitchenType: any;
   selectedKitchenType: any;
   kitchen: ExteriorKitchen;
+  accordion: I_AccordionData;
+  setAccordion: (accordion_name: string) => void;
 }
 
 const Kitchen = (props: I_Props) => {
-  const { setSelectedKitchenType, selectedKitchenType, kitchen } = props;
+  const { setSelectedKitchenType, selectedKitchenType, kitchen, accordion, setAccordion } = props;
 
   return (
     <>
-      <div className="flex items-center">
-        <div className="w-5 h-5 rounded-full bg-green-500 p-[5px]">
-          <span className="block w-full h-full rounded-full bg-white"></span>
-        </div>
-        <p className="w-[calc(100%-113px)] pl-4 pr-2 text-lg font-medium leading-[30px] text-primary-100 mb-0">
-          Kitchen
-        </p>
-        <DetailHeaderButtons />
-        <button type="button" className="ml-6">
-          <AccordionOpenSvg />
-        </button>
-      </div>
+      <CardHeader
+        name="Kitchen"
+        className={`${accordion.kitchen.value ? 'show' : 'hide'}`}
+        accordion={accordion}
+        setAccordion={setAccordion}
+        label={"kitchen"}
+      />
 
       <div className="mt-4 pl-5">
-        <CardDetails className="">
+        <CardDetails className={`${accordion.kitchen.value ? 'show' : 'hide'}`}>
           <>
             {kitchen.kitchen_layout ? (
               <div className="inline-flex items-center">

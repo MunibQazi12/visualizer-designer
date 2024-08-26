@@ -1,8 +1,4 @@
 import React from "react";
-import MapSvg from "@/../public/svgs/map";
-import EyeSvg from "@/../public/svgs/eyes";
-import AccordionCloseSvg from "@/../public/svgs/accordion-close";
-import DetailHeaderButtons from "../details-header-buttons";
 import { ExteriorGreatRoom, I_AccordionData } from "@/utils/Interfaces/Products";
 import CardDetails from "../card/details";
 import CardSingleItem from "../card/single-item";

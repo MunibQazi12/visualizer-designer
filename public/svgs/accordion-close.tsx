@@ -12,8 +12,8 @@ const AccordionCloseSvg = () => {
       <path
         d="M1 1L11 9.57762M1 18L10.771 9.72973"
         stroke="#495057"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
