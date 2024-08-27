@@ -1,29 +1,36 @@
 import { Step, Stepper } from "react-form-stepper";
 import "@/css/style.css";
 import { useEffect, useState } from "react";
+import { I_Categories } from "../meterial-preview";
 
 interface I_Props {
   activeStep: number;
   selectedSteps: any;
+  categories: I_Categories[];
 }
 
 const CustomStepper = (props: I_Props) => {
-  const { activeStep, selectedSteps } = props;
+  const { activeStep, selectedSteps, categories } = props;
 
   return (
     <>
       <Stepper activeStep={activeStep} className="mainStepper">
-        <Step
-          index={0}
-          disabled={false}
-          label="Exterior"
-          className={`${activeStep === 0 ? "active-stepper" : ""}`}
-          onClick={() => {
-            selectedSteps(0);
-          }}
-        />
+        {categories.map((category, index) => {
+          return (
+            <Step
+              key={category.label}
+              index={index}
+              disabled={false}
+              label={category.label}
+              className={`${activeStep === index ? "active-stepper" : ""}`}
+              onClick={() => {
+                selectedSteps(index);
+              }}
+            />
+          );
+        })}
 
-        <Step
+        {/* <Step
           index={1}
           disabled={false}
           label="1st Floor"
@@ -41,7 +48,7 @@ const CustomStepper = (props: I_Props) => {
           onClick={() => {
             selectedSteps(2);
           }}
-        />
+        /> */}
 
         <Step
           index={3}

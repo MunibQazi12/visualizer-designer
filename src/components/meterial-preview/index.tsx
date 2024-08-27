@@ -12,12 +12,30 @@ import Products from "@/services/firebase/products";
 import LocationPick from "../../../public/svgs/location-pick";
 import dynamic from "next/dynamic";
 import StepDetails from "@/components/step-details";
-import Map from"../../img/map.png";
-import Image from "next/image";
+
+import { getUserPath, grabAllData } from "@/services/firebase/configuration";
 
 const MainSteppers = dynamic(() => import("@/components/steppers"), {
   ssr: false,
 });
+
+interface Option {
+  OPTION_NAME: string;
+  OPTION_VALUE: string;
+  LOCATION: string;
+  CATEGORY: string;
+  [key: string]: any;
+}
+
+interface Options {
+  [key: string]: Option;
+}
+
+export interface I_Categories {
+  label: string;
+}
+
+const userId = getUserPath(); // Fetch the user path based on your config
 
 const MaterialPreview = () => {
   const [products, setProducts] = useState<I_Products[]>([]);
@@ -30,6 +48,16 @@ const MaterialPreview = () => {
   const [visualizerDesignElements, setVisualizerDesignElements] = useState<
     I_VisualizerDesign[]
   >([]);
+
+  const [selectedDesignElements, setSelectedDesignElements] = useState<
+  any
+>([]);
+
+
+  const [globalOptions, setGlobalOptions] = useState<Options>({});
+  const [categories, setCategories] = useState<I_Categories[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [topbarOptions, setTopbaroptions] = useState<[]>([]);
 
   const [currentStep, setCurrentStep] = useState<number>(0); // Start at step 1
 
@@ -123,59 +151,196 @@ const MaterialPreview = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    Products.fetchGlobalOptions("globalOptions")
+      .then((data) => {
+        const globalOptions: any = data;
+
+        setGlobalOptions(globalOptions || {});
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // const completeData: any = grabAllData();
+    // console.log("completeData: ", completeData);
   }, []);
 
+  const renderStepHeader = () => {
+    const categories_inner = Object.keys(globalOptions).reduce(
+      (acc: string[], uuid) => {
+        const option = globalOptions[uuid];
+        const category = option[" Category"];
+        if (!acc.includes(category)) {
+          acc.push(category);
+        }
+        return acc;
+      },
+      []
+    );
+
+    const tbo: I_Categories[] = categories_inner.map((categories) => ({
+      label: categories,
+    }));
+    setCategories(tbo);
+
+    setSelectedCategory(tbo[0]?.label);
+  };
+
+
+  const renderOptionsAccordion = () => {
+    if (!selectedCategory) return null;
+
+
+    const locations = Object.keys(globalOptions).reduce((acc: { [key: string]: { [optSelId: string]: Option[] } }, uuid) => {
+      const option = { ...globalOptions[uuid] };
+      const category = option[" Category"];
+      const location = option[" Location"];
+      const optSelId = option[" Opt Sel ID "];
+  
+      if (category === selectedCategory) {
+        if (!acc[location]) acc[location] = {};
+        if (!acc[location][optSelId]) acc[location][optSelId] = [];
+        acc[location][optSelId].push(option);
+      }
+
+      return acc;
+    }, {});
+
+    setSelectedDesignElements(locations);
+
+    console.log('locations: ', locations);
+  
+    return locations;
+      // <Accordion multiple>
+      //   {Object.keys(locations).map((location) => (
+      //     <AccordionTab key={location} header={location}>
+      //       {Object.keys(locations[location]).map((optSelId) => (
+      //         <div key={optSelId} className="option-group">
+      //           <h3>{locations[location][optSelId][0][" Opt Sel Name"]}</h3>
+      //           {locations[location][optSelId].map((option) => (
+      //             <div key={option["id"]} className="option-card">
+      //               <div className="option-info">
+      //                 <span className="option-name">{option[" Opt Val Name"]}</span>
+      //                 <span className="option-price">+${option["Price"] || 0}</span>
+      //               </div>
+      //               <div className="option-actions">
+  
+  
+  
+      //                 <Checkbox
+      //                   inputId={option["id"] + "selection"}
+      //                   checked={isChecked(option["id"], "isSelected")}
+      //                   onChange={(e) =>
+      //                     e.checked
+      //                       ? handleCheck(option["id"], "isSelected", variant ? []: locations[location][optSelId])
+      //                       : handleUncheck(option["id"], "isSelected")
+      //                   }
+      //                 />
+      //                 <label htmlFor={option["id"] + "selection"}>{variant ? "Make Available": ""}</label>
+  
+      //                 {isOverridden(option["id"], "isSelected") && (
+      //                   <span className="overridden">Overridden</span>
+      //                 )}
+  
+  
+      //                 {variant &&
+      //                 <div>
+      //                   <Checkbox
+      //                     inputId={option["id"] + "default"}
+      //                     checked={isChecked(option["id"], "isDefault")}
+      //                     onChange={(e) =>
+      //                       e.checked
+      //                         ? handleCheck(option["id"], "isDefault", locations[location][optSelId])
+      //                         : handleUncheck(option["id"], "isDefault")
+      //                     }
+      //                   />
+      //                   <label htmlFor={option["id"] + "default"}>Default</label>
+  
+      //                   {isOverridden(option["id"], "isDefault") && (
+      //                     <span className="overridden">Overridden</span>
+      //                   )}
+      //                 </div>
+      //                 }
+  
+  
+  
+  
+  
+  
+  
+      //               </div>
+      //             </div>
+      //           ))}
+      //         </div>
+      //       ))}
+      //     </AccordionTab>
+      //   ))}
+      // </Accordion>
+
+  };
+
+
+  useEffect(() => {
+    renderStepHeader();
+    renderOptionsAccordion();
+  }, [globalOptions]);
+
+  console.log('selectedDesignElements" ', selectedDesignElements)
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
-      <MainSteppers
-        activeStep={currentStep}
-        selectedSteps={selectedStepsHandler}
-      />
+      {categories.length > 0 ? (
+        <MainSteppers
+          activeStep={currentStep}
+          selectedSteps={selectedStepsHandler}
+          categories={categories}
+        />
+      ) : null}
       {/* Side stepper start */}
-        <div className="flex justify-between">
-          {visualizerDesignElements.length ? (
-            <div className="flex pl-7 w-1/2">
-              <div className="relative mt-9">
-                <div className="h-[135px] bg-white w-[3px] absolute top-0 left-0 right-0 mx-auto">
+      <div className="flex justify-between">
+        { Object.keys(selectedDesignElements).length ? (
+          <div className="flex pl-7 w-1/2">
+            <div className="relative mt-9">
+              <div className="h-[135px] bg-white w-[3px] absolute top-0 left-0 right-0 mx-auto"></div>
+              <div className="flex flex-col gap-2 items-center relative z-10 w-[18px]">
+                <div className="w-3 h-3 rounded-full bg-green-500 p-[3px]"></div>
+                <div className="w-[18px] h-[18px] rounded-full bg-green-500 p-1">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
                 </div>
-                <div className="flex flex-col gap-2 items-center relative z-10 w-[18px]">
-                  <div className="w-3 h-3 rounded-full bg-green-500 p-[3px]"></div>
-                  <div className="w-[18px] h-[18px] rounded-full bg-green-500 p-1">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
-                  <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
-                    <span className="bg-white w-full h-full rounded-full block"></span>
-                  </div>
+                <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
+                </div>
+                <div className="w-3 h-3 rounded-full bg-gray-400 p-[3px]">
+                  <span className="bg-white w-full h-full rounded-full block"></span>
                 </div>
               </div>
-              <StepDetails
-                currentStep={currentStep}
-                visualizerDesignElements={visualizerDesignElements}
-                setSelectedKitchenType={setSelectedKitchenTypeHandler}
-                selectedKitchenType={selectedKitchenType}
-              />
-              </div>
-          ) : null}
-
-            <SettingCard
-              ActiveProducts={activeProducts}
-              DefaultProducts={defaultProducts}
-              FeaturesElements={featuresElements}
+            </div>
+            <StepDetails
+              currentStep={currentStep}
+              visualizerDesignElements={visualizerDesignElements}
+              setSelectedKitchenType={setSelectedKitchenTypeHandler}
               selectedKitchenType={selectedKitchenType}
+              selectedDesignElements={selectedDesignElements}
             />
-        </div>
+          </div>
+        ) : null}
+
+        <SettingCard
+          ActiveProducts={activeProducts}
+          DefaultProducts={defaultProducts}
+          FeaturesElements={featuresElements}
+          selectedKitchenType={selectedKitchenType}
+        />
+      </div>
       {/* Side stepper end */}
       <ImageSlider products={products} />
       <button
@@ -202,7 +367,7 @@ const MaterialPreview = () => {
         </div>
       </div> */}
       {/* View all modal start */}
-        {/* <div className="w-full max-w-[1177px] h-screen px-2.5 mx-auto rounded-xl absolute top-0 left-0 right-0 flex justify-center items-center">
+      {/* <div className="w-full max-w-[1177px] h-screen px-2.5 mx-auto rounded-xl absolute top-0 left-0 right-0 flex justify-center items-center">
           <div className="w-full bg-white rounded-2xl h-full max-h-[802px]">
             <div className="flex justify-between items-center sm:pt-[35px] pt-7 sm:pr-[37px] pr-6 sm:pb-11 pb-7 sm:pl-[55px] pl-8">
               <h1 className="text-2xl font-semibold leading-[29px] text-primary-100 mb-0">Kitchen Countertop</h1>
@@ -278,7 +443,7 @@ const MaterialPreview = () => {
             </div>
           </div>
         </div> */}
-        {/* View all modal end */}
+      {/* View all modal end */}
     </div>
   );
 };
