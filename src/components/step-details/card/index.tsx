@@ -8,7 +8,7 @@ interface I_Props {
 const Card = (props: I_Props) => {
   return (
     <div
-      className={`w-full rounded-[20px] pt-2 pb-2.5 pl-4 pr-[15px] mb-[23px] bg-white ${props.className}`}
+      className={`w-full rounded-[20px] pt-[9px] pb-[9px] pl-4 pr-[15px] bg-white overflow-hidden stepper-detail-dropdown ${props.className}`}
     >
       {props.children}
     </div>

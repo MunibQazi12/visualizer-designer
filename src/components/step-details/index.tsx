@@ -116,22 +116,22 @@ const StepDetails = (props: I_Props) => {
     return (
       <div
         key={"visualizeElements" + index}
-        className="w-full max-w-[348px] ml-9 relative step-detail-container h-full max-h-[530px] overflow-auto rounded-[20px] scrollBar-hidden"
+        className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer"
       >
         {data.dinningRoom.dining_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed mb-[23px]">
             <DiningRoom dinningRoom={data.dinningRoom} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.greatRoom.great_room_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed mb-[23px]">
             <GreatRoom greatRoom={data.greatRoom} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.kitchen.kitchen_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed mb-[23px]">
             <Kitchen
               selectedKitchenType={selectedKitchenType}
               setSelectedKitchenType={setSelectedKitchenType}
@@ -143,19 +143,19 @@ const StepDetails = (props: I_Props) => {
         ) : null}
 
         {data.ownersSuit.owner_suit_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed mb-[23px]">
             <OwnerSuit ownersSuit={data.ownersSuit} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.ownersBath.owner_bath_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed mb-[23px]">
             <OwnerBath ownersBath={data.ownersBath} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}
 
         {data.mudRoom.mudroom_layout ? (
-          <Card className="stepper-detail-dropdown-open completed">
+          <Card className="completed">
             <MudRoom mudRoom={data.mudRoom} accordion={accordionToShow} setAccordion={setAccordionToShowHandler}/>
           </Card>
         ) : null}

@@ -25,7 +25,7 @@ const Kitchen = (props: I_Props) => {
       />
 
       <div className="pl-5">
-        <CardDetails className={`${accordion.kitchen.value ? 'show' : 'hidden'}`}>
+        <CardDetails className={`${accordion.kitchen.value ? "list-show" : "list-hide"}`}>
           <>
             {kitchen.kitchen_layout ? (
               <div className="inline-flex items-center">

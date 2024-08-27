@@ -19,7 +19,7 @@ const ImageSlider = (props: I_Props) => {
   const { products } = props;
 
   return (
-    <div className="slider-container 2xl:max-w-[1340px] 2xl:w-full w-[70%] mx-auto mt-10 absolute left-0 right-0 bottom-12">
+    <div className="slider-container 2xl:max-w-[1340px] 2xl:w-full w-[70%] mx-auto mt-10 absolute left-0 right-0 lg:bottom-12 bottom-8">
       <Button
         className="mx-auto w-[136px] 2xl:h-9 h-7 bg-white rounded-full"
         iconStart={<ApplicationIcon />}

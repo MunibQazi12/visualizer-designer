@@ -134,7 +134,7 @@ const MaterialPreview = () => {
       {/* Side stepper start */}
         <div className="flex justify-between">
           {visualizerDesignElements.length ? (
-            <div className="flex pl-7">
+            <div className="flex pl-7 w-1/2">
               <div className="relative mt-9">
                 <div className="h-[135px] bg-white w-[3px] absolute top-0 left-0 right-0 mx-auto">
                 </div>

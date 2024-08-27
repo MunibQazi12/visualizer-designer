@@ -24,7 +24,7 @@ const OwnerBath = (props: I_Props) => {
       />
 
       <div className="pl-5">
-        <CardDetails className={`${accordion.ownersBath.value ? 'show' : 'hidden'}`}>
+        <CardDetails className={`${accordion.ownersBath.value ? "list-show" : "list-hide"}`}>
           <>
             {ownersBath.owner_bath_layout ? (
               <CardSingleItem name="Owner Bath Layout" />

@@ -33,7 +33,7 @@ const DiningRoom = (props: I_Props) => {
 
       <div className="pl-5">
         <CardDetails
-          className={`${accordion.dinningRoom.value ? "show" : "hidden"}`}
+          className={`${accordion.dinningRoom.value ? "list-show" : "list-hide"}`}
         >
           <>
             {dinningRoom.dining_layout ? (

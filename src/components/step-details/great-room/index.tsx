@@ -23,7 +23,7 @@ const GreatRoom = (props: I_Props) => {
       />
 
       <div className="pl-5">
-        <CardDetails  className={`${accordion.greatRoom.value ? "show" : "hidden"}`}>
+        <CardDetails  className={`${accordion.greatRoom.value ? "list-show" : "list-hide"}`}>
           <>
             {greatRoom.great_room_layout ? (
               <CardSingleItem name="Great Room Layout" />

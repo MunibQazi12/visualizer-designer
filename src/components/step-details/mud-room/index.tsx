@@ -25,7 +25,7 @@ const MudRoom = (props: I_Props) => {
       />
 
       <div className="pl-5">
-        <CardDetails className={`${accordion.mudRoom.value ? 'show' : 'hidden'}`}>
+        <CardDetails className={`${accordion.mudRoom.value ? "list-show" : "list-hide"}`}>
           <>
             {mudRoom.mudroom_layout ? (
               <CardSingleItem name="Mud Room Layout" />

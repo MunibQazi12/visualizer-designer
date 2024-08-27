@@ -23,7 +23,7 @@ const OwnerSuit = (props: I_Props) => {
       />
 
       <div className="pl-5">
-        <CardDetails className={`${accordion.ownersSuit.value ? 'show' : 'hidden'}`}>
+        <CardDetails className={`${accordion.ownersSuit.value ? "list-show" : "list-hide"}`}>
           <>
             {ownersSuit.owner_suit_layout ? (
               <CardSingleItem name="Owner Suit Layout" />
