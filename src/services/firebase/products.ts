@@ -1,4 +1,7 @@
-import { readData } from ".";
+import { readData, readDataWithUserID } from ".";
+
+
+
 
 const Products = {
   fetchProducts: async (path: string) => {
@@ -11,6 +14,18 @@ const Products = {
       return [];
     }
   },
+  fetchGlobalOptions: async (path: string) => {
+    const snapshot = await readDataWithUserID(path);
+    if (snapshot.exists()) {
+      const products = snapshot.val();
+      return products
+    } else {
+      console.log("No data available");
+      return [];
+    }
+  },
+
+
 
   //   onValue(collectionRef, (snapshot) => {
   //     const dataItem = snapshot.val();

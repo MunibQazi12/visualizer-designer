@@ -5,6 +5,17 @@
 @layer utilities {
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.font-roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.scrollBar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
 .material-preview {
   background-image: url(../../public/images/meterial-bg.png);
 }
@@ -58,5 +69,16 @@ a {
   }
   .slick-next:before {
     left: 30px;
+  }
+}
+
+@media (max-height: 1040px) {
+  .material-preview {
+    position: relative;
+  }
+
+  .slider-container {
+    position: unset;
+    padding-bottom: 20px;
   }
 }

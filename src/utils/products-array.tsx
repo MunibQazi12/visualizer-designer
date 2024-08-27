@@ -355,6 +355,39 @@ const ExtKitchenLayout = {
   horseShoeKitchen: false,
 };
 
+const ExtDiningLayout = {
+  oneWallKitchen: true,
+  galleyKitchen: false,
+  lShapedKitchen: true,
+  horseShoeKitchen: false,
+};
+
+const ExtShelvingLayout = {
+  racks: true,
+  boxes: false,
+  screws: true,
+};
+
+const ExtStairsLayout = {
+  standardHeight: true,
+  standardWidth: false,
+  customPlain: false,
+};
+
+const ExtSeatingArea = {
+  sofa: true,
+  Table: false,
+  bed: true,
+  chair: false,
+};
+
+const ExtJacuzziArea = {
+  standardHeight: true,
+  standardWidth: false,
+  customPlain: false,
+}
+
+
 const FirstKitchenLayout = {
   oneWallKitchen: true,
   galleyKitchen: false,
@@ -399,59 +432,166 @@ const ReviewPlumbingFixture = {
 };
 
 const Exterior = {
-  dinningRoom: ExtDiningRoom,
-  greatRoom: ExtGreatRoom,
+  // dinningRoom: ExtDiningRoom,
+  dinningRoom: {
+    dining_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    shelvings: ExtShelvingLayout,
+    stairs: ExtStairsLayout,
+    seating_area: ExtSeatingArea,
+  },
+  // greatRoom: ExtGreatRoom,
+  greatRoom: {
+    great_room_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    seating_area: ExtSeatingArea,
+  },
   kitchen: {
     kitchen_layout: ExtKitchenLayout,
     cabinet_selection: CabinetOptions,
     counterTop_selection: CounterTopSelections,
     plumbing_fixture: ExtPlumbingFixture,
   },
-  ownersSuit: ExtOwnersSuit,
-  ownersBath: ExtOwnersBath,
-  mudRoom: ExtMudRoom,
+  // ownersSuit: ExtOwnersSuit,
+  ownersSuit: {
+    owner_suit_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    shelvings: ExtShelvingLayout,
+  },
+  // ownersBath: ExtOwnersBath,
+  ownersBath: {
+    owner_bath_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    shelvings: ExtShelvingLayout,
+    jacuzzi: ExtJacuzziArea,
+  },
+  // mudRoom: ExtMudRoom,
+  mudRoom: {
+    mudroom_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    shelvings: ExtShelvingLayout,
+  },
 };
 
 const FirstFloor = {
-  dinningRoom: FirstDiningRoom,
-  greatRoom: FirstGreatRoom,
+  // dinningRoom: FirstDiningRoom,
+  dinningRoom: {
+    dining_layout: ExtDiningLayout, 
+    shelvings: ExtShelvingLayout,
+    stairs: ExtStairsLayout,
+  },
+  // greatRoom: FirstGreatRoom,
+  greatRoom: {
+    great_room_layout: ExtDiningLayout,
+    seating_area: ExtSeatingArea,
+  },
   kitchen: {
     kitchen_layout: FirstKitchenLayout,
     cabinet_selection: CabinetOptions,
     counterTop_selection: CounterTopSelections,
     plumbing_fixture: FirstPlumbingFixture,
   },
-  ownersSuit: FirstOwnersSuit,
-  ownersBath: FirstOwnersBath,
-  mudRoom: FirstMudRoom,
+  // ownersSuit: FirstOwnersSuit,
+  // ownersBath: FirstOwnersBath,
+  // mudRoom: FirstMudRoom,
+  ownersSuit: {
+    owner_suit_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+  },
+  ownersBath: {
+    owner_bath_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+    jacuzzi: ExtJacuzziArea,
+  },
+  mudRoom: {
+    mudroom_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+  },
 };
 
 const SecondFloor = {
-  dinningRoom: SecondDiningRoom,
-  greatRoom: SecondGreatRoom,
+  // dinningRoom: SecondDiningRoom,
+  // greatRoom: SecondGreatRoom,
+
+  dinningRoom: {
+    dining_layout: ExtDiningLayout,
+    stairs: ExtStairsLayout,
+    seating_area: ExtSeatingArea,
+  },
+  
+  greatRoom: {
+    great_room_layout: ExtDiningLayout,
+    seating_area: ExtSeatingArea,
+  },
+
+
   kitchen: {
     kitchen_layout: SecondKitchenLayout,
     cabinet_selection: CabinetOptions,
     counterTop_selection: CounterTopSelections,
     plumbing_fixture: SecondPlumbingFixture,
   },
-  ownersSuit: SecondOwnersSuit,
-  ownersBath: SecondOwnersBath,
-  mudRoom: SecondMudRoom,
+  // ownersSuit: SecondOwnersSuit,
+  // ownersBath: SecondOwnersBath,
+  // mudRoom: SecondMudRoom,
+
+
+  ownersSuit: {
+    owner_suit_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+  },
+  // ownersBath: ExtOwnersBath,
+  ownersBath: {
+    owner_bath_layout: ExtDiningLayout,
+    cabinet_selection: CabinetOptions,
+    shelvings: ExtShelvingLayout,
+  },
+  // mudRoom: ExtMudRoom,
+  mudRoom: {
+    mudroom_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+  },
+
 };
 
 const Review = {
-  dinningRoom: ReviewDiningRoom,
-  greatRoom: ReviewGreatRoom,
+  // dinningRoom: ReviewDiningRoom,
+  dinningRoom: {
+    dining_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+    seating_area: ExtSeatingArea,
+  },
+  greatRoom: {
+    great_room_layout: ExtDiningLayout,
+    seating_area: ExtSeatingArea,
+  },
+
+  // greatRoom: ReviewGreatRoom,
   kitchen: {
     kitchen_layout: ReviewKitchenLayout,
     cabinet_selection: CabinetOptions,
     counterTop_selection: CounterTopSelections,
     plumbing_fixture: ReviewPlumbingFixture,
   },
-  ownersSuit: ReviewOwnersSuit,
-  ownersBath: ReviewOwnersBath,
-  mudRoom: ReviewMudRoom,
+  // ownersSuit: ReviewOwnersSuit,
+  // ownersBath: ReviewOwnersBath,
+  // mudRoom: ReviewMudRoom,
+
+  ownersSuit: {
+    owner_suit_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+  },
+  // ownersBath: ExtOwnersBath,
+  ownersBath: {
+    owner_bath_layout: ExtDiningLayout,
+    jacuzzi: ExtJacuzziArea,
+  },
+  // mudRoom: ExtMudRoom,
+  mudRoom: {
+    mudroom_layout: ExtDiningLayout,
+    shelvings: ExtShelvingLayout,
+  },
+
 };
 
 export const visualizerDesign = [

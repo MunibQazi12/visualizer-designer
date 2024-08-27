@@ -61,14 +61,15 @@
 }
 
 .more-data-scroll {
-    background: linear-gradient(360deg, rgb(255 255 255 / 0%) 0%, #ffffff 100%);
-    /* background: linear-gradient(360deg, rgba(217, 217, 217, 0) 0%, #737373 100%); */
+    /* background: linear-gradient(360deg, rgb(255 255 255 / 3%) 0%, #ffffff 100%); */
+    background: linear-gradient(360deg, rgba(217, 217, 217, 0) 0%, #9d9d9d 100%);
     height: 123px;
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    rotate: 180deg
+    rotate: 180deg;
+    opacity: 0.7;
 }
 
 .cabinet-fadeIn {
@@ -78,3 +79,34 @@
 .cabinet-fadeOut {
     opacity: 0;
 }
+
+.stepper-detail-dropdown .list-hide {
+    max-height: 0;
+    transition: 0.2s all ease-out;
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+.stepper-detail-dropdown .list-show {
+    max-height: 168px;
+    transition: 0.2s all ease-in;
+    overflow: auto;
+}
+
+/* @media (max-height: 1000px) {
+    .cardsContainer {
+        height: 400px;
+    }
+}
+
+@media (max-height: 880px) {
+    .cardsContainer {
+        height: 300px;
+    }
+}
+
+@media (max-height: 740px) {
+    .cardsContainer {
+        height: 200px;
+    }
+} */
