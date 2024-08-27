@@ -1,6 +1,5 @@
 import { Step, Stepper } from "react-form-stepper";
 import "@/css/style.css";
-import { useEffect, useState } from "react";
 import { I_Categories } from "../meterial-preview";
 
 interface I_Props {
@@ -24,7 +23,7 @@ const CustomStepper = (props: I_Props) => {
               label={category.label}
               className={`${activeStep === index ? "active-stepper" : ""}`}
               onClick={() => {
-                selectedSteps(index);
+                selectedSteps(index, category.label);
               }}
             />
           );
@@ -56,9 +55,10 @@ const CustomStepper = (props: I_Props) => {
           label="Review"
           className={`${activeStep === 3 ? "active-stepper" : ""}`}
           onClick={() => {
-            selectedSteps(3);
+            selectedSteps(3, 'Appliances');
           }}
         />
+
       </Stepper>
     </>
   );

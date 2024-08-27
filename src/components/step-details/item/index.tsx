@@ -1,27 +1,23 @@
 import React from "react";
 
-import AccordionCloseSvg from "@/../public/svgs/accordion-close";
-import DetailHeaderButtons from "../details-header-buttons";
 import {
   ExteriorDiningRoom,
   I_AccordionData,
-  I_VisualizerDesign,
 } from "@/utils/Interfaces/Products";
 import CardDetails from "../card/details";
 import CardSingleItem from "../card/single-item";
 import CardHeader from "../card/card-header";
-import EyeSvg from "../../../../public/svgs/eyes";
 
 interface I_Props {
   name: ExteriorDiningRoom;
-  details: any;
+  item_details: any;
   accordion: I_AccordionData;
   setAccordion: (accordion_name: string) => void;
 }
 
 const Item = (props: I_Props) => {
-  const { name, accordion, setAccordion, details } = props;
-  console.log("details", details);
+  const { name, accordion, setAccordion, item_details } = props;
+  console.log("item_details", item_details);
   return (
     <>
       <CardHeader
@@ -39,10 +35,10 @@ const Item = (props: I_Props) => {
           }`}
         >
           <>
-            {Object.keys(details).map((optSelId: any) => (
-              <CardSingleItem name={details[optSelId][0][" Opt Sel Name"]} key={optSelId} />
+            {Object.keys(item_details).map((optSelId: any) => (
+              <CardSingleItem name={item_details[optSelId][0][" Opt Sel Name"]} key={optSelId} />
 
-              // <h3 key={optSelId}>{details[optSelId][0][" Opt Sel Name"]}</h3>
+              // <h3 key={optSelId}>{item_details[optSelId][0][" Opt Sel Name"]}</h3>
               // <div key={optSelId} className="option-group">
 
               //   <h3>
@@ -67,22 +63,6 @@ const Item = (props: I_Props) => {
               //   ))} */}
               // </div>
             ))}
-         
-            {/* {dinningRoom.dining_layout ? (
-              <CardSingleItem name="Dining Layout" />
-            ) : null}
-
-            {dinningRoom.cabinet_selection ? (
-              <CardSingleItem name="Cabinet Selection" />
-            ) : null}
-
-            {dinningRoom.seating_area ? (
-              <CardSingleItem name="Seating Area" />
-            ) : null}
-
-            {dinningRoom.shelvings ? <CardSingleItem name="Shelving" /> : null}
-
-            {dinningRoom.stairs ? <CardSingleItem name="Stairs" /> : null} */}
           </>
         </CardDetails>
       </div>

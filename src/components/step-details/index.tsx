@@ -15,8 +15,6 @@ import Item from "./item";
 interface I_Props {
   visualizerDesignElements: I_VisualizerDesign[];
   currentStep: number;
-  setSelectedKitchenType: any;
-  selectedKitchenType: any;
   selectedDesignElements: any;
 }
 
@@ -24,25 +22,23 @@ const StepDetails = (props: I_Props) => {
   const {
     visualizerDesignElements,
     currentStep,
-    setSelectedKitchenType,
-    selectedKitchenType,
     selectedDesignElements,
   } = props;
 
   const [accordionToShow, setAccordionToShow] =
     useState<I_AccordionData>(accordionData);
 
-  const selectDataToDisplay = () => {
-    if (currentStep === 0) {
-      return [visualizerDesignElements[0]?.exterior];
-    } else if (currentStep === 1) {
-      return [visualizerDesignElements[0]?.firstFloor];
-    } else if (currentStep === 2) {
-      return [visualizerDesignElements[0]?.secondFloor];
-    } else {
-      return [visualizerDesignElements[0]?.review];
-    }
-  };
+  // const selectDataToDisplay = () => {
+  //   if (currentStep === 0) {
+  //     return [visualizerDesignElements[0]?.exterior];
+  //   } else if (currentStep === 1) {
+  //     return [visualizerDesignElements[0]?.firstFloor];
+  //   } else if (currentStep === 2) {
+  //     return [visualizerDesignElements[0]?.secondFloor];
+  //   } else {
+  //     return [visualizerDesignElements[0]?.review];
+  //   }
+  // };
 
   const setAccordionToShowHandler = (value: string) => {
     console.log("value: ", value);
@@ -109,20 +105,20 @@ const StepDetails = (props: I_Props) => {
     }
   };
 
-  const visualizeElements: any = selectDataToDisplay();
+  // const visualizeElements: any = selectDataToDisplay();
 
-  console.log("selectedDesignElements: ss ", selectedDesignElements);
-  console.log("visualizeElements ", visualizeElements);
+  // console.log("selectedDesignElements: ss ", selectedDesignElements);
+  // console.log("visualizeElements ", visualizeElements);
 
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
         {Object.keys(selectedDesignElements).map(
-          (location: any, index: number) => (
-            <Card className="completed mb-[23px]" key={location}>
+          (item_name: any, index: number) => (
+            <Card className="completed mb-[23px]" key={item_name+'_'+index}>
               <Item
-                name={location}
-                details={selectedDesignElements[location]}
+                name={item_name}
+                item_details={selectedDesignElements[item_name]}
                 accordion={accordionToShow}
                 setAccordion={setAccordionToShowHandler}
               />
