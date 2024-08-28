@@ -84,6 +84,7 @@ const Item = (props: I_Props) => {
           </>
         </CardDetails>
       </div>
+
     </>
   );
 };

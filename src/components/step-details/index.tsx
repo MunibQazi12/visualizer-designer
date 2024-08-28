@@ -1,4 +1,3 @@
-import { I_VisualizerDesign } from "@/utils/Interfaces/Products";
 import Card from "@/components/step-details/card";
 import { useEffect, useRef, useState } from "react";
 
@@ -78,19 +77,19 @@ const StepDetails = (props: I_Props) => {
     setHasScrolled(true);
   };
 
-  useEffect(() => {
-    const divElement = divRef.current;
-    // Attach the scroll event listener
-    if (divElement) {
-      console.log("divElement: ", divElement);
-      divElement.addEventListener("scroll", handleScroll);
+  // useEffect(() => {
+  //   const divElement = divRef.current;
+  //   // Attach the scroll event listener
+  //   if (divElement) {
+  //     console.log("divElement: ", divElement);
+  //     divElement.addEventListener("scroll", handleScroll);
 
-      // Cleanup event listener on component unmount
-      return () => {
-        divElement.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, [selectedDesignElements, openCards]);
+  //     // Cleanup event listener on component unmount
+  //     return () => {
+  //       divElement.removeEventListener("scroll", handleScroll);
+  //     };
+  //   }
+  // }, [selectedDesignElements, openCards]);
 
   // Function to check the height of the div
   const checkHeight = () => {
@@ -116,9 +115,9 @@ const StepDetails = (props: I_Props) => {
     }
   };
 
-  const scrollToBottom = () => {
-    if (divRef.current) divRef.current.scrollTop = divRef.current.scrollHeight;
-  };
+  // const scrollToBottom = () => {
+  //   if (divRef.current) divRef.current.scrollTop = divRef.current.scrollHeight;
+  // };
 
   // const scrollToEnd = () => {
   //   const divElement = divRef.current;
@@ -135,24 +134,23 @@ const StepDetails = (props: I_Props) => {
   //     });
   //   }
   // };
-  const [stillScrollTop, setStillScrollTop] = useState(0);
 
-  useEffect(() => {
-    const current = divRef.current;
-    const handleScroll = () => {
-      if (divRef.current) {
-        console.log(divRef?.current?.scrollTop);
-      }
-    };
-    if (current) {
-      current.addEventListener("scroll", handleScroll);
-    }
-    return () => {
-      if (current) {
-        current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [divRef?.current?.scrollTop]);
+  // useEffect(() => {
+  //   const current = divRef.current;
+  //   const handleScroll = () => {
+  //     if (divRef.current) {
+  //       console.log(divRef?.current?.scrollTop);
+  //     }
+  //   };
+  //   if (current) {
+  //     current.addEventListener("scroll", handleScroll);
+  //   }
+  //   return () => {
+  //     if (current) {
+  //       current.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, [divRef?.current?.scrollTop]);
 
   useEffect(() => {
     checkHeight();
@@ -161,16 +159,6 @@ const StepDetails = (props: I_Props) => {
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
-        <p>
-          {isHeightGreaterThan530 > 530
-            ? "Height is greater than 530px"
-            : "Height is not greater than 530px"}
-        </p>
-        <p>
-          {hasScrolled
-            ? "User has scrolled the div"
-            : "User has not scrolled the div"}
-        </p>
         <div ref={divRef}>
           {Object.keys(selectedDesignElements).map(
             (location_item_name: string) => {
@@ -191,25 +179,13 @@ const StepDetails = (props: I_Props) => {
             }
           )}
 
-          {isHeightGreaterThan530 > 530 ? (
+          {isHeightGreaterThan530 > 510 ? (
             <>
-              <button
-                onClick={() => {
-                  if (divRef.current) {
-                    if (1) {
-                      divRef.current.scrollTo({ top: 330, behavior: "smooth" });
-                    } else {
-                      divRef.current.scrollTo({
-                        top: divRef.current.scrollHeight,
-                        behavior: "smooth",
-                      });
-                    }
-                  }
-                }}
-              >
+              <button onClick={scrollToEnd}>
                 <ScrollDownSvg />
               </button>
               <div className="more-data-scroll"></div>
+
             </>
           ) : null}
         </div>
