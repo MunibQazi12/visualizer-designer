@@ -137,7 +137,6 @@ const StepDetails = (props: I_Props) => {
   // };
   const [stillScrollTop, setStillScrollTop] = useState(0);
 
-
   useEffect(() => {
     const current = divRef.current;
     const handleScroll = () => {
@@ -155,66 +154,66 @@ const StepDetails = (props: I_Props) => {
     };
   }, [divRef?.current?.scrollTop]);
 
-
   useEffect(() => {
     checkHeight();
   }, [selectedDesignElements, openCards]);
 
   return (
     <>
-
-        <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
+      <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
         <p>
-              {isHeightGreaterThan530 > 530
-                ? "Height is greater than 530px"
-                : "Height is not greater than 530px"}
-            </p>
-            <p>
-              {hasScrolled
-                ? "User has scrolled the div"
-                : "User has not scrolled the div"}
-            </p>
-          <div ref={divRef}>
-            {Object.keys(selectedDesignElements).map(
-              (location_item_name: string) => {
-                const key = selectedCategory + "_" + location_item_name;
-                return (
-                  <Card className="completed mb-[23px]" key={key}>
-                    <Item
-                      name={location_item_name}
-                      item_details={selectedDesignElements[location_item_name]}
-                      toggleValue={key}
-                      openCards={openCards}
-                      setToggle={handleToggle}
-                      handleRadioToggle={handleRadioToggle}
-                      radioBox={radioBox}
-                    />
-                  </Card>
-                );
-              }
-            )}
-
-            {isHeightGreaterThan530 > 530 ? (
-              <>
-                <button onClick={() => {
-            if (divRef.current) {
-              if (1) {
-                divRef.current.scrollTo({ top: 330, behavior: "smooth" });
-              } else {
-                divRef.current.scrollTo({
-                  top: divRef.current.scrollHeight,
-                  behavior: "smooth",
-                });
-              }
+          {isHeightGreaterThan530 > 530
+            ? "Height is greater than 530px"
+            : "Height is not greater than 530px"}
+        </p>
+        <p>
+          {hasScrolled
+            ? "User has scrolled the div"
+            : "User has not scrolled the div"}
+        </p>
+        <div ref={divRef}>
+          {Object.keys(selectedDesignElements).map(
+            (location_item_name: string) => {
+              const key = selectedCategory + "_" + location_item_name;
+              return (
+                <Card className="completed mb-[23px]" key={key}>
+                  <Item
+                    name={location_item_name}
+                    item_details={selectedDesignElements[location_item_name]}
+                    toggleValue={key}
+                    openCards={openCards}
+                    setToggle={handleToggle}
+                    handleRadioToggle={handleRadioToggle}
+                    radioBox={radioBox}
+                  />
+                </Card>
+              );
             }
-          }} >
-                  <ScrollDownSvg />
-                </button>
-                <div className="more-data-scroll"></div>
-              </>
-            ) : null}
-          </div>
+          )}
+
+          {isHeightGreaterThan530 > 530 ? (
+            <>
+              <button
+                onClick={() => {
+                  if (divRef.current) {
+                    if (1) {
+                      divRef.current.scrollTo({ top: 330, behavior: "smooth" });
+                    } else {
+                      divRef.current.scrollTo({
+                        top: divRef.current.scrollHeight,
+                        behavior: "smooth",
+                      });
+                    }
+                  }
+                }}
+              >
+                <ScrollDownSvg />
+              </button>
+              <div className="more-data-scroll"></div>
+            </>
+          ) : null}
         </div>
+      </div>
     </>
   );
 

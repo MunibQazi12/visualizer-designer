@@ -169,6 +169,10 @@
     overflow: auto;
 }
 
+.selected-img:first-child div {
+    border-color: #3CE342;
+}
+
 /* @media (max-height: 1000px) {
     .cardsContainer {
         height: 400px;

@@ -75,6 +75,7 @@ a {
 @media (max-height: 1040px) {
   .material-preview {
     position: relative;
+    height: 100vh;
   }
 
   .slider-container {
