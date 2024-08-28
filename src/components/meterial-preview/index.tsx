@@ -14,6 +14,7 @@ import dynamic from "next/dynamic";
 import StepDetails from "@/components/step-details";
 
 import { getUserPath, grabAllData } from "@/services/firebase/configuration";
+import LocationMap from "../location-map";
 
 const MainSteppers = dynamic(() => import("@/components/steppers"), {
   ssr: false,
