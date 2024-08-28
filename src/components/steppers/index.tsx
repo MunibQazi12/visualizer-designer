@@ -6,21 +6,24 @@ interface I_Props {
   activeStep: number;
   selectedSteps: any;
   categories: I_Categories[];
+  className: string;
+  displayLabel: boolean;
 }
 
 const CustomStepper = (props: I_Props) => {
-  const { activeStep, selectedSteps, categories } = props;
+  const { activeStep, selectedSteps, categories, className, displayLabel } =
+    props;
 
   return (
     <>
-      <Stepper activeStep={activeStep} className="mainStepper">
+      <Stepper activeStep={activeStep} className={`${className}`}>
         {categories.map((category, index) => {
           return (
             <Step
               key={category.label}
               index={index}
               disabled={false}
-              label={category.label}
+              label={displayLabel ? category.label : ""}
               className={`${activeStep === index ? "active-stepper" : ""}`}
               onClick={() => {
                 selectedSteps(index, category.label);
@@ -52,13 +55,12 @@ const CustomStepper = (props: I_Props) => {
         <Step
           index={3}
           disabled={false}
-          label="Review"
+          label={displayLabel ? "Review" : ""}
           className={`${activeStep === 3 ? "active-stepper" : ""}`}
           onClick={() => {
-            selectedSteps(3, 'Appliances');
+            selectedSteps(3, "Appliances");
           }}
         />
-
       </Stepper>
     </>
   );

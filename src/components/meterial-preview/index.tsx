@@ -50,10 +50,7 @@ const MaterialPreview = () => {
     I_VisualizerDesign[]
   >([]);
 
-  const [selectedDesignElements, setSelectedDesignElements] = useState<
-  any
->([]);
-
+  const [selectedDesignElements, setSelectedDesignElements] = useState<any>([]);
 
   const [globalOptions, setGlobalOptions] = useState<Options>({});
   const [categories, setCategories] = useState<I_Categories[]>([]);
@@ -69,79 +66,47 @@ const MaterialPreview = () => {
     plumbing_fixture: false,
   });
 
-  // const setSelectedKitchenTypeHandler = (selectedOption: string) => {
-  //   if (selectedOption === "kitchen_layout") {
-  //     setSelectedKitchenType({
-  //       kitchen_layout: true,
-  //       cabinet_selection: false,
-  //       counterTop_selection: false,
-  //       plumbing_fixture: false,
-  //     });
-  //   } else if (selectedOption === "cabinet_selection") {
-  //     setSelectedKitchenType({
-  //       cabinet_selection: true,
-  //       counterTop_selection: false,
-  //       plumbing_fixture: false,
-  //       kitchen_layout: false,
-  //     });
-  //   } else if (selectedOption === "counterTop_selection") {
-  //     setSelectedKitchenType({
-  //       counterTop_selection: true,
-  //       cabinet_selection: false,
-  //       plumbing_fixture: false,
-  //       kitchen_layout: false,
-  //     });
-  //   } else if (selectedOption === "plumbing_fixture") {
-  //     setSelectedKitchenType({
-  //       plumbing_fixture: true,
-  //       cabinet_selection: false,
-  //       counterTop_selection: false,
-  //       kitchen_layout: false,
-  //     });
-  //   }
-  // };
-
   const selectedStepsHandler = (step_number: number, step_name: string) => {
     setSelectedCategory(step_name);
     setCurrentStep(step_number);
   };
 
   useEffect(() => {
-    Products.fetchProducts("products")
-      .then((data) => {
-        const products: I_Products[] = data;
-        setProducts(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Products.fetchProducts("products")
+    //   .then((data) => {
+    //     const products: I_Products[] = data;
+    //     setProducts(products);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    Products.fetchProducts("ActiveProducts")
-      .then((data) => {
-        const products: I_Products[] = data;
-        setActiveProducts(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Products.fetchProducts("ActiveProducts")
+    //   .then((data) => {
+    //     const products: I_Products[] = data;
+    //     setActiveProducts(products);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    Products.fetchProducts("DefaultProducts")
-      .then((data) => {
-        const products: I_Products[] = data;
-        setDefaultProducts(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Products.fetchProducts("DefaultProducts")
+    //   .then((data) => {
+    //     const products: I_Products[] = data;
+    //     setDefaultProducts(products);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
-    Products.fetchProducts("FeaturesElements")
-      .then((data) => {
-        const products: I_FeaturesElements[] = data;
-        setFeaturesElements(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // Products.fetchProducts("FeaturesElements")
+    //   .then((data) => {
+    //     const products: I_FeaturesElements[] = data;
+    //     setFeaturesElements(products);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     Products.fetchProducts("visualizerDesign")
       .then((data) => {
@@ -187,35 +152,35 @@ const MaterialPreview = () => {
     !selectedCategory?.length && setSelectedCategory(tbo[0]?.label);
   };
 
-
   const renderOptionsAccordion = () => {
     if (!selectedCategory) return null;
 
-    const locations = Object.keys(globalOptions).reduce((acc: { [key: string]: { [optSelId: string]: Option[] } }, uuid) => {
-      const option = { ...globalOptions[uuid] };
-      const category = option[" Category"];
-      const location = option[" Location"];
-      const optSelId = option[" Opt Sel ID "];
-  
-      if (category === selectedCategory) {
-        if (!acc[location]) acc[location] = {};
-        if (!acc[location][optSelId]) acc[location][optSelId] = [];
-        acc[location][optSelId].push(option);
-      }
+    const locations = Object.keys(globalOptions).reduce(
+      (acc: { [key: string]: { [optSelId: string]: Option[] } }, uuid) => {
+        const option = { ...globalOptions[uuid] };
+        const category = option[" Category"];
+        const location = option[" Location"];
+        const optSelId = option[" Opt Sel ID "];
 
-      return acc;
-    }, {});
+        if (category === selectedCategory) {
+          if (!acc[location]) acc[location] = {};
+          if (!acc[location][optSelId]) acc[location][optSelId] = [];
+          acc[location][optSelId].push(option);
+        }
+
+        return acc;
+      },
+      {}
+    );
 
     setSelectedDesignElements(locations);
     return locations;
   };
 
-
   useEffect(() => {
     renderStepHeader();
     renderOptionsAccordion();
   }, [globalOptions, selectedCategory]);
-  console.log('selectedCategory: ', selectedCategory);
 
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
@@ -224,17 +189,30 @@ const MaterialPreview = () => {
           activeStep={currentStep}
           selectedSteps={selectedStepsHandler}
           categories={categories}
+          className="mainStepper"
+          displayLabel={true}
         />
       ) : null}
+
       {/* Side stepper start */}
       <div className="flex lg:flex-row flex-col lg:gap-0 gap-6 justify-between">
-        { Object.keys(selectedDesignElements).length ? (
+        {Object.keys(selectedDesignElements).length ? (
           <div className="flex pl-7 lg:w-1/2">
             <VerticalStepper />
+
+            <MainSteppers
+              activeStep={currentStep}
+              selectedSteps={selectedStepsHandler}
+              categories={categories}
+              className="mainStepper"
+              displayLabel={false}
+            />
+
             <StepDetails
               currentStep={currentStep}
               visualizerDesignElements={visualizerDesignElements}
               selectedDesignElements={selectedDesignElements}
+              selectedCategory={selectedCategory}
             />
           </div>
         ) : null}
@@ -246,6 +224,7 @@ const MaterialPreview = () => {
           selectedKitchenType={selectedKitchenType}
         />
       </div>
+
       {/* Side stepper end */}
       <ImageSlider products={products} />
       <button

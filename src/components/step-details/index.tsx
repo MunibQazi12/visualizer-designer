@@ -1,21 +1,14 @@
 import { I_VisualizerDesign } from "@/utils/Interfaces/Products";
-import DiningRoom from "@/components/step-details/dining-room";
 import Card from "@/components/step-details/card";
-import GreatRoom from "@/components/step-details/great-room";
-import OwnerSuit from "@/components/step-details/owner-suit";
-import OwnerBath from "@/components/step-details/owner-bath";
-import MudRoom from "@/components/step-details/mud-room";
-import Kitchen from "@/components/step-details/kitchen";
-import ScrollDownSvg from "@/../public/svgs/scroll-down";
 import { useState } from "react";
-import { I_AccordionData } from "@/utils/Interfaces/Products";
-import { accordionData } from "@/utils";
+
 import Item from "./item";
 
 interface I_Props {
   visualizerDesignElements: I_VisualizerDesign[];
   currentStep: number;
   selectedDesignElements: any;
+  selectedCategory: string | null;
 }
 
 const StepDetails = (props: I_Props) => {
@@ -23,10 +16,11 @@ const StepDetails = (props: I_Props) => {
     visualizerDesignElements,
     currentStep,
     selectedDesignElements,
+    selectedCategory,
   } = props;
 
-  const [accordionToShow, setAccordionToShow] =
-    useState<I_AccordionData>(accordionData);
+    const [openCards, setOpenCards] = useState<string[]>([]);
+    const [radioBox, setRadioBox] = useState<string[]>([]);
 
   // const selectDataToDisplay = () => {
   //   if (currentStep === 0) {
@@ -40,91 +34,45 @@ const StepDetails = (props: I_Props) => {
   //   }
   // };
 
-  const setAccordionToShowHandler = (value: string) => {
-    console.log("value: ", value);
-    if (value === accordionData.dinningRoom.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          dinningRoom: {
-            label: prev.dinningRoom.label,
-            value: !prev.dinningRoom.value,
-          },
-        };
-      });
-    } else if (value === accordionData.greatRoom.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          greatRoom: {
-            label: prev.greatRoom.label,
-            value: !prev.greatRoom.value,
-          },
-        };
-      });
-    } else if (value === accordionData.kitchen.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          kitchen: {
-            label: prev.kitchen.label,
-            value: !prev.kitchen.value,
-          },
-        };
-      });
-    } else if (value === accordionData.ownersSuit.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          ownersSuit: {
-            label: prev.ownersSuit.label,
-            value: !prev.ownersSuit.value,
-          },
-        };
-      });
-    } else if (value === accordionData.ownersBath.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          ownersBath: {
-            label: prev.ownersBath.label,
-            value: !prev.ownersBath.value,
-          },
-        };
-      });
-    } else if (value === accordionData.mudRoom.label) {
-      setAccordionToShow((prev: I_AccordionData) => {
-        return {
-          ...prev,
-          mudRoom: {
-            label: prev.mudRoom.label,
-            value: !prev.mudRoom.value,
-          },
-        };
-      });
+  const handleToggle = (card_key: string) => {
+    if (openCards.includes(card_key)) {
+      setOpenCards(openCards.filter((i:any) => i !== card_key));
+    } else {
+      setOpenCards([...openCards, card_key]);
     }
   };
 
-  // const visualizeElements: any = selectDataToDisplay();
 
-  // console.log("selectedDesignElements: ss ", selectedDesignElements);
-  // console.log("visualizeElements ", visualizeElements);
+  const handleRadioToggle = (radio_key: string) => {
+    if (radioBox.includes(radio_key)) {
+      setRadioBox(radioBox.filter((i: any) => i !== radio_key));
+    } else {
+      setRadioBox([...radioBox, radio_key]);
+    }
+  };
 
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
-        {Object.keys(selectedDesignElements).map(
-          (item_name: any, index: number) => (
-            <Card className="completed mb-[23px]" key={item_name+'_'+index}>
+        {Object.keys(selectedDesignElements).map((location_item_name: any, index: number) => {
+          const key = selectedCategory + "_" + location_item_name;
+          return (
+            <Card
+              className="completed mb-[23px]"
+              key={key}
+            >
               <Item
-                name={item_name}
-                item_details={selectedDesignElements[item_name]}
-                accordion={accordionToShow}
-                setAccordion={setAccordionToShowHandler}
+                name={location_item_name}
+                item_details={selectedDesignElements[location_item_name]}
+                toggleValue = {key}
+                openCards={openCards}
+                setToggle={handleToggle}
+                handleRadioToggle={handleRadioToggle}
+                radioBox = {radioBox}
               />
             </Card>
-          )
-        )}
+          );
+        })}
       </div>
     </>
   );

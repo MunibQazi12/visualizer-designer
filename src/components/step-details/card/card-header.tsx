@@ -8,13 +8,11 @@ import EyeSvg from "../../../../public/svgs/eyes";
 interface I_Props {
   name: any;
   className?: string;
-  accordion: I_AccordionData;
-  setAccordion: (accordion_name: string) => void;
-  label: string
+  setToggle: (accordion_name: string) => void;
+  toggleValue: string;
 }
-
 const CardHeader = (props: I_Props) => {
-  const { name, className, accordion, label, setAccordion } = props;
+  const { name, className, setToggle, toggleValue } = props;
   return (
     <div className={`flex items-center`}>
       <div className="w-5 h-5 rounded-full bg-green-500 p-[5px]"></div>
@@ -22,7 +20,7 @@ const CardHeader = (props: I_Props) => {
         {name}
       </p>
       <DetailHeaderButtons />
-      <button type="button" className={`ease-in duration-200 group ${className}`} onClick={() => setAccordion(label)}>
+      <button type="button" className={`ease-in duration-200 group ${className}`} onClick={() => setToggle(toggleValue)}>
            <AccordionCloseSvg />
       </button>
     </div>
