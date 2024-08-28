@@ -6,7 +6,7 @@ import AccordionOpenSvg from "../../../../public/svgs/accordion-open";
 import EyeSvg from "../../../../public/svgs/eyes";
 
 interface I_Props {
-  name: any;
+  name: string;
   className?: string;
   setToggle: (accordion_name: string) => void;
   toggleValue: string;

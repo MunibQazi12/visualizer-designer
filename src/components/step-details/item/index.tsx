@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 
-import {
-  ExteriorDiningRoom,
-} from "@/utils/Interfaces/Products";
+import { ExteriorDiningRoom } from "@/utils/Interfaces/Products";
 import CardDetails from "../card/details";
 import CardSingleItem from "../card/single-item";
 import CardHeader from "../card/card-header";
 
 interface I_Props {
-  name: ExteriorDiningRoom;
+  name: string;
   item_details: any;
   setToggle: (toggle_key: string) => void;
   toggleValue: string;
-  openCards: any;
-  handleRadioToggle: (toggle_key: string) => void;
+  openCards: string[];
+  handleRadioToggle: (toggle_key: string, actual_value: string) => void;
   radioBox: string[];
 }
 
 const Item = (props: I_Props) => {
-  const { name, setToggle, item_details, toggleValue, openCards, handleRadioToggle, radioBox } = props;
+  const {
+    name,
+    setToggle,
+    item_details,
+    toggleValue,
+    openCards,
+    handleRadioToggle,
+    radioBox,
+  } = props;
 
   return (
     <>
@@ -44,8 +50,9 @@ const Item = (props: I_Props) => {
                   name={item_details[optSelId][0][" Opt Sel Name"]}
                   key={key}
                   handleRadioToggle={handleRadioToggle}
-                  radioBox = {radioBox}
-                  radioToggleValue = {key}
+                  optSelId={optSelId}
+                  radioBox={radioBox}
+                  radioToggleValue={key}
                 />
 
                 // <h3 key={optSelId}>{item_details[optSelId][0][" Opt Sel Name"]}</h3>

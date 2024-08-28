@@ -5,74 +5,138 @@ import { useState } from "react";
 import Item from "./item";
 
 interface I_Props {
-  visualizerDesignElements: I_VisualizerDesign[];
-  currentStep: number;
   selectedDesignElements: any;
+  setSelectedVarientElements: any;
   selectedCategory: string | null;
 }
 
 const StepDetails = (props: I_Props) => {
   const {
-    visualizerDesignElements,
-    currentStep,
     selectedDesignElements,
     selectedCategory,
+    setSelectedVarientElements,
   } = props;
 
-    const [openCards, setOpenCards] = useState<string[]>([]);
-    const [radioBox, setRadioBox] = useState<string[]>([]);
-
-  // const selectDataToDisplay = () => {
-  //   if (currentStep === 0) {
-  //     return [visualizerDesignElements[0]?.exterior];
-  //   } else if (currentStep === 1) {
-  //     return [visualizerDesignElements[0]?.firstFloor];
-  //   } else if (currentStep === 2) {
-  //     return [visualizerDesignElements[0]?.secondFloor];
-  //   } else {
-  //     return [visualizerDesignElements[0]?.review];
-  //   }
-  // };
+  const [openCards, setOpenCards] = useState<string[]>([]);
+  const [radioBox, setRadioBox] = useState<string[]>([]);
 
   const handleToggle = (card_key: string) => {
     if (openCards.includes(card_key)) {
-      setOpenCards(openCards.filter((i:any) => i !== card_key));
+      setOpenCards(openCards.filter((i: any) => i !== card_key));
     } else {
       setOpenCards([...openCards, card_key]);
     }
   };
 
-
-  const handleRadioToggle = (radio_key: string) => {
+  const handleRadioToggle = (radio_key: string, actual_value: string) => {
     if (radioBox.includes(radio_key)) {
       setRadioBox(radioBox.filter((i: any) => i !== radio_key));
     } else {
-      setRadioBox([...radioBox, radio_key]);
+      // setRadioBox([...radioBox, radio_key]);
+      setRadioBox([radio_key]);
     }
+
+    // const aa = Object.keys(selectedDesignElements).map((location: string) => {
+
+    //     return Object.keys(selectedDesignElements[location]).map((optSelId: any) => {
+    //       // const key = toggleValue + "_" + optSelId;
+    //       // console.log("aaaa", selectedDesignElements[location][optSelId])
+
+    //         return selectedDesignElements[location][optSelId].filter((data: any) => { return data[' Opt Sel ID '] === actual_value}).map((option: any) => (
+    //           // <div key={option["id"]} className="option-card">
+    //           //   <div className="option-info">
+    //           //     <span className="option-name">
+    //                 // console.log("Opt Val Name: ", option[" Opt Val Name"], "radioBox:", radioBox)
+    //                 // console.log("location_item_name: ",location,  "Opt Val Name: ", option[" Opt Val Name"], "radioBox:", radioBox)
+
+    //                 (option[" Opt Val Name"])
+
+    //           //     </span>
+    //           //     <span className="option-price">
+    //           //       +${option["Price"] || 0}
+    //           //     </span>
+    //           //   </div>
+    //           // </div>
+    //         ));
+
+    //     });
+
+    // });
+
+    // console.log("aa: ", aa)
+
+    const returnValue = Object.keys(selectedDesignElements).flatMap(
+      (location: string) => {
+        return Object.keys(selectedDesignElements[location]).flatMap(
+          (optSelId: any) => {
+            return selectedDesignElements[location][optSelId]
+              .filter((data: any) => data[" Opt Sel ID "] === actual_value)
+              .map((option: any) => {
+                return option;
+
+                // option[" Opt Val Name"]
+              });
+          }
+        );
+      }
+    );
+
+    setSelectedVarientElements(returnValue);
+
+    console.log("returnValue: ", returnValue);
   };
+
+  // useEffect(() => {
+  //   {
+  //     Object.keys(selectedDesignElements).map((location: string) => {
+  //       {
+  //         Object.keys(selectedDesignElements[location]).map((optSelId: any) => {
+  //           // const key = toggleValue + "_" + optSelId;
+  //           console.log("aaaa", selectedDesignElements[location][optSelId])
+
+  //           {
+  //             selectedDesignElements[location][optSelId].filter((data: any) => { return data[' Opt Sel ID '] === 'APP-ENT-WALL-1'}).map((option: any) => (
+  //               // <div key={option["id"]} className="option-card">
+  //               //   <div className="option-info">
+  //               //     <span className="option-name">
+  //                     console.log("location_item_name: ",location,  "Opt Val Name: ", option[" Opt Val Name"], "radioBox:", radioBox)
+  //               //     </span>
+  //               //     <span className="option-price">
+  //               //       +${option["Price"] || 0}
+  //               //     </span>
+  //               //   </div>
+  //               // </div>
+  //             ));
+  //           }
+  //         });
+  //       }
+  //     });
+  //   }
+  //   // setSelectedVarientElements();
+  // }, [radioBox]);
+
 
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
-        {Object.keys(selectedDesignElements).map((location_item_name: any, index: number) => {
-          const key = selectedCategory + "_" + location_item_name;
-          return (
-            <Card
-              className="completed mb-[23px]"
-              key={key}
-            >
-              <Item
-                name={location_item_name}
-                item_details={selectedDesignElements[location_item_name]}
-                toggleValue = {key}
-                openCards={openCards}
-                setToggle={handleToggle}
-                handleRadioToggle={handleRadioToggle}
-                radioBox = {radioBox}
-              />
-            </Card>
-          );
-        })}
+        {Object.keys(selectedDesignElements).map(
+          (location_item_name: string) => {
+            const key = selectedCategory + "_" + location_item_name;
+            return (
+              <Card className="completed mb-[23px]" key={key}>
+                <Item
+                  name={location_item_name}
+                  item_details={selectedDesignElements[location_item_name]}
+                  toggleValue={key}
+                  openCards={openCards}
+                  setToggle={handleToggle}
+                  handleRadioToggle={handleRadioToggle}
+                  radioBox={radioBox}
+                />
+              </Card>
+            );
+          }
+        )}
       </div>
     </>
   );

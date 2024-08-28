@@ -3,13 +3,15 @@ import React, { Children } from "react";
 interface I_Props {
   name: string;
   className?: string;
-  handleRadioToggle: (accordion_name: string) => void;
+  handleRadioToggle: (toggle_key: string, actual_value: string) => void;
   radioBox: string[];
   radioToggleValue: string;
+  optSelId: string;
 }
 
 const CardSingleItem = (props: I_Props) => {
-  const { className, name, handleRadioToggle, radioBox, radioToggleValue } = props;
+  const { className, name, handleRadioToggle, radioBox, radioToggleValue, optSelId } =
+    props;
   return (
     <div className={`flex ${className}`}>
       <div
@@ -19,7 +21,10 @@ const CardSingleItem = (props: I_Props) => {
       >
         <span className="block w-full h-full rounded-full bg-white"></span>
       </div>
-      <p className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer w-[calc(100%-36px)]" onClick={() => handleRadioToggle(radioToggleValue)}>
+      <p
+        className="text-base font-normal leading-6 text-primary-100 mb-0 pl-[13px] cursor-pointer w-[calc(100%-36px)]"
+        onClick={() => handleRadioToggle(radioToggleValue, optSelId)}
+      >
         {name}
       </p>
     </div>

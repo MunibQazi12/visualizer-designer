@@ -15,6 +15,7 @@ import StepDetails from "@/components/step-details";
 
 import { getUserPath, grabAllData } from "@/services/firebase/configuration";
 import VerticalStepper from "./vertical-stepper";
+import LocationMap from "../location-map";
 
 const MainSteppers = dynamic(() => import("@/components/steppers"), {
   ssr: false,
@@ -51,25 +52,22 @@ const MaterialPreview = () => {
   >([]);
 
   const [selectedDesignElements, setSelectedDesignElements] = useState<any>([]);
+  const [selectedVarientElements, setSelectedVarientElements] = useState<any>(
+    []
+  );
 
   const [globalOptions, setGlobalOptions] = useState<Options>({});
   const [categories, setCategories] = useState<I_Categories[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [topbarOptions, setTopbaroptions] = useState<[]>([]);
 
   const [currentStep, setCurrentStep] = useState<number>(0); // Start at step 1
-
-  const [selectedKitchenType, setSelectedKitchenType] = useState<any>({
-    kitchen_layout: false,
-    cabinet_selection: false,
-    counterTop_selection: false,
-    plumbing_fixture: false,
-  });
 
   const selectedStepsHandler = (step_number: number, step_name: string) => {
     setSelectedCategory(step_name);
     setCurrentStep(step_number);
   };
+
+  const [mapToggle, setMapToggle] = useState<boolean>(true);
 
   useEffect(() => {
     // Products.fetchProducts("products")
@@ -131,7 +129,7 @@ const MaterialPreview = () => {
     // console.log("completeData: ", completeData);
   }, []);
 
-  const renderStepHeader = () => {
+  const stepDetailsHeaderData = () => {
     const categories_inner = Object.keys(globalOptions).reduce(
       (acc: string[], uuid) => {
         const option = globalOptions[uuid];
@@ -152,7 +150,7 @@ const MaterialPreview = () => {
     !selectedCategory?.length && setSelectedCategory(tbo[0]?.label);
   };
 
-  const renderOptionsAccordion = () => {
+  const stepDetailsHeaderBody = () => {
     if (!selectedCategory) return null;
 
     const locations = Object.keys(globalOptions).reduce(
@@ -178,8 +176,8 @@ const MaterialPreview = () => {
   };
 
   useEffect(() => {
-    renderStepHeader();
-    renderOptionsAccordion();
+    stepDetailsHeaderData();
+    stepDetailsHeaderBody();
   }, [globalOptions, selectedCategory]);
 
   return (
@@ -209,47 +207,44 @@ const MaterialPreview = () => {
             />
 
             <StepDetails
-              currentStep={currentStep}
-              visualizerDesignElements={visualizerDesignElements}
               selectedDesignElements={selectedDesignElements}
               selectedCategory={selectedCategory}
+              setSelectedVarientElements={setSelectedVarientElements}
             />
           </div>
         ) : null}
 
-        <SettingCard
-          ActiveProducts={activeProducts}
-          DefaultProducts={defaultProducts}
-          FeaturesElements={featuresElements}
-          selectedKitchenType={selectedKitchenType}
-        />
+        {Object.keys(selectedVarientElements).length ? (
+          <SettingCard
+            ActiveProducts={activeProducts}
+            DefaultProducts={defaultProducts}
+            FeaturesElements={featuresElements}
+            selectedVarientElements={selectedVarientElements}
+          />
+        ) : null}
       </div>
 
       {/* Side stepper end */}
       <ImageSlider products={products} />
-      <button
-        title="map"
-        className="absolute flex p-2 justify-center items-center bottom-3 left-3 bg-white h-[50px] w-[50px] rounded-[10px]"
-      >
-        <LocationPick />
-      </button>
-      {/* <div className="w-[369px] h-[302px] bg-white rounded-[20px] absolute left-[62px] bottom-[73px]">
-        <div className="flex justify-end items-center gap-[26px] pt-[22px] px-[21px]">
-          <button type="button">
-            <svg width="30" height="5" viewBox="0 0 30 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 2.5H27" stroke="#5C5C5C" strokeWidth="5" strokeLinecap="round"/>
-            </svg>
-          </button>
-          <button type="button">
-            <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M25.3224 9.38877C24.4248 9.38877 23.6972 8.66114 23.6972 7.76356V6.62113C23.6972 6.53493 23.663 6.45225 23.602 6.39129C23.4751 6.26436 23.2693 6.26436 23.1423 6.39129L18.5196 11.014C17.885 11.6487 16.8559 11.6487 16.2212 11.014C15.5866 10.3793 15.5866 9.35027 16.2212 8.71559L20.8439 4.0929C20.9049 4.03194 20.9391 3.94927 20.9391 3.86306C20.9391 3.68354 20.7936 3.53802 20.6141 3.53802H19.4717C18.5741 3.53802 17.8465 2.81039 17.8465 1.91281C17.8465 1.01523 18.5741 0.287598 19.4717 0.287598L25.3224 0.287598C26.22 0.287598 26.9476 1.01523 26.9476 1.91281V7.76356C26.9476 8.66114 26.22 9.38877 25.3224 9.38877ZM2.56988 17.1887C3.46746 17.1887 4.19509 17.9163 4.19509 18.8139V19.9567C4.19509 20.0429 4.22934 20.1256 4.29029 20.1866C4.41723 20.3135 4.62304 20.3135 4.74997 20.1866L9.37344 15.5631C10.0081 14.9284 11.0371 14.9284 11.6718 15.5631C12.3065 16.1978 12.3068 17.2271 11.6721 17.8618L7.04865 22.4853C6.98769 22.5462 6.95345 22.6289 6.95345 22.7151C6.95345 22.8946 7.09897 23.0401 7.27849 23.0401H8.42135C9.31893 23.0401 10.0466 23.7678 10.0466 24.6653C10.0466 25.5629 9.31893 26.291 8.42135 26.291H2.56948C1.67191 26.291 0.944275 25.5633 0.944275 24.6657V18.8139C0.944275 17.9163 1.6723 17.1887 2.56988 17.1887Z" fill="#5C5C5C"/>
-            </svg>
-          </button>
-        </div>
-        <div className="pr-[11px] pl-[15px] pb-10">
-          <Image src={Map} alt="Map" />
-        </div>
-      </div> */}
+
+      {mapToggle ? (
+        <button
+          title="map"
+          className="absolute flex p-2 justify-center items-center bottom-3 left-3 bg-white h-[50px] w-[50px] rounded-[10px]"
+          onClick={() => {
+            setMapToggle(false);
+          }}
+        >
+          <LocationPick />
+        </button>
+      ) : (
+        <LocationMap
+          mapToggle={() => {
+            setMapToggle(true);
+          }}
+        />
+      )}
+
       {/* View all modal start */}
       {/* <div className="w-full max-w-[1177px] h-screen px-2.5 mx-auto rounded-xl absolute top-0 left-0 right-0 flex justify-center items-center">
           <div className="w-full bg-white rounded-2xl h-full max-h-[802px]">
