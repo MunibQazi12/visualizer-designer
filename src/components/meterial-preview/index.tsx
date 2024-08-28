@@ -214,7 +214,7 @@ const MaterialPreview = () => {
           </div>
         ) : null}
 
-        {Object.keys(selectedVarientElements).length ? (
+        {!!Object.keys(selectedVarientElements).length ? (
           <SettingCard
             ActiveProducts={activeProducts}
             DefaultProducts={defaultProducts}
