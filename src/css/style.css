@@ -60,6 +60,80 @@
     border-color: white;
 }
 
+/* Setpper left */
+
+.mainStepper.stepper-left-sec {
+    flex-direction: column;
+    align-items: center;
+    max-width: unset;
+    width: 18px;
+    padding: 0 !important;
+    gap: 8px;
+    position: relative;
+    margin: 36px 0 0;
+}
+
+.mainStepper.stepper-left-sec::before {
+    content: "";
+    width: 3px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.mainStepper.stepper-left-sec .ConnectorContainer-0-2-20 {
+    display: none;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(136, 150, 165, 1);
+    position: relative;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    position: absolute;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button.completed {
+    background-color: #70C23E;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button.completed::before {
+    background-color: #70C23E;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 {
+    flex: 0;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button.active-stepper {
+    background: #70C23E;
+    width: 18px;
+    height: 18px;
+}
+
+.mainStepper.stepper-left-sec .StepContainer-0-2-2 .StepMain-0-2-3 button.active-stepper::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+}
+
 .more-data-scroll {
     /* background: linear-gradient(360deg, rgb(255 255 255 / 3%) 0%, #ffffff 100%); */
     background: linear-gradient(360deg, rgba(217, 217, 217, 0) 0%, #9d9d9d 100%);
@@ -70,6 +144,8 @@
     width: 100%;
     rotate: 180deg;
     opacity: 0.7;
+    pointer-events: none;
+    border-radius: 20px;
 }
 
 .cabinet-fadeIn {

@@ -3,6 +3,7 @@ import Card from "@/components/step-details/card";
 import { useState } from "react";
 
 import Item from "./item";
+import ScrollDownSvg from "../../../public/svgs/scroll-down";
 
 interface I_Props {
   visualizerDesignElements: I_VisualizerDesign[];
@@ -54,25 +55,29 @@ const StepDetails = (props: I_Props) => {
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
-        {Object.keys(selectedDesignElements).map((location_item_name: any, index: number) => {
-          const key = selectedCategory + "_" + location_item_name;
-          return (
-            <Card
-              className="completed mb-[23px]"
-              key={key}
-            >
-              <Item
-                name={location_item_name}
-                item_details={selectedDesignElements[location_item_name]}
-                toggleValue = {key}
-                openCards={openCards}
-                setToggle={handleToggle}
-                handleRadioToggle={handleRadioToggle}
-                radioBox = {radioBox}
-              />
-            </Card>
-          );
-        })}
+        <div>
+          {Object.keys(selectedDesignElements).map((location_item_name: any, index: number) => {
+            const key = selectedCategory + "_" + location_item_name;
+            return (
+              <Card
+                className="completed mb-[23px]"
+                key={key}
+              >
+                <Item
+                  name={location_item_name}
+                  item_details={selectedDesignElements[location_item_name]}
+                  toggleValue = {key}
+                  openCards={openCards}
+                  setToggle={handleToggle}
+                  handleRadioToggle={handleRadioToggle}
+                  radioBox = {radioBox}
+                />
+              </Card>
+            );
+          })}
+          <ScrollDownSvg />
+          <div className="more-data-scroll"></div>
+        </div>
       </div>
     </>
   );
@@ -213,8 +218,7 @@ const StepDetails = (props: I_Props) => {
   //         </Card>
   //       ) : null}
 
-  //       <ScrollDownSvg />
-  //       <div className="more-data-scroll"></div>
+  //       
   //     </div>
   //   );
   // });

@@ -14,7 +14,7 @@ import dynamic from "next/dynamic";
 import StepDetails from "@/components/step-details";
 
 import { getUserPath, grabAllData } from "@/services/firebase/configuration";
-import VerticalStepper from "./vertical-stepper";
+// import VerticalStepper from "./vertical-stepper";
 
 const MainSteppers = dynamic(() => import("@/components/steppers"), {
   ssr: false,
@@ -198,15 +198,17 @@ const MaterialPreview = () => {
       <div className="flex lg:flex-row flex-col lg:gap-0 gap-6 justify-between">
         {Object.keys(selectedDesignElements).length ? (
           <div className="flex pl-7 lg:w-1/2">
-            <VerticalStepper />
+            {/* <VerticalStepper /> */}
 
-            <MainSteppers
-              activeStep={currentStep}
-              selectedSteps={selectedStepsHandler}
-              categories={categories}
-              className="mainStepper"
-              displayLabel={false}
-            />
+            <div>
+              <MainSteppers
+                activeStep={currentStep}
+                selectedSteps={selectedStepsHandler}
+                categories={categories}
+                className="mainStepper stepper-left-sec"
+                displayLabel={false}
+              />
+            </div>
 
             <StepDetails
               currentStep={currentStep}
