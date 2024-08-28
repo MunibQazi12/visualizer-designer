@@ -2,35 +2,32 @@ import Image from "next/image";
 import { FC } from "react";
 import img from "@/img/option-product.png"
 interface Props {
-  title: string;
   products: any;
 }
 
 const Selections: FC<Props> = (props) => {
-  const { title, products } = props;
+  const { products } = props;
 
   return (
-    <div>
-      <p className="2xl:mt-2 mt-1 text-primary-100 font-semibold text-sm">
-        {title}
-      </p>
-      <div className="2xl:mt-2 mt-1 grid grid-cols-3 2xl:gap-4 gap-3 items-center w-full justify-between">
-        <div key={products[" Opt Val Name"]} className="flex flex-col justify-center items-center">
-          <Image
-            className="2xl:w-[72px] h-[52px] w-[52px] 2xl:h-[72px] object-cover "
-            src={img}
-            alt="cabnit"
-            width={100}
-            height={100}
-          />
-          <p className="text-center text-primary-100 font-medium text-[10px]">
+
+      <>
+        <div key={products[" Opt Val Name"]} className="w-[98px] text-center selected-img">
+          <div className="w-full h-[97px] border-4 border-gray-500 rounded-2xl">
+            <Image
+              className="w-full h-full object-cover "
+              src={img}
+              alt="cabinet"
+              width={100}
+              height={100}
+            />
+          </div>
+          <p className="text-primary-100 font-medium text-xs  leading-5 font-roboto mb-0">
             {/* {title} */}
             {/* {products[" Opt Val Name"]}  */}
             {products[" Opt Val Name"]} 
           </p>
-          <p className="text-center text-[10px] text-primary-100">
+          <p className="text-primary-100 font-normal text-xs  leading-4 font-roboto mb-0 mt-1">
             {/* {description}   */}
-            
           </p>
         </div>
 
@@ -54,8 +51,7 @@ const Selections: FC<Props> = (props) => {
             </div>
           );
         })} */}
-      </div>
-    </div>
+      </>
   );
 };
 

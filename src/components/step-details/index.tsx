@@ -118,7 +118,7 @@ const StepDetails = (props: I_Props) => {
 
   return (
     <>
-      <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
+      <div className="w-full max-w-[348px] ml-[33px] relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
         <div>
           {Object.keys(selectedDesignElements).map(
             (location_item_name: string) => {

@@ -28,26 +28,30 @@ const SettingCard = (props: I_Props) => {
   }
     return (
       <div style={{width: "500px"}}>
-        <div className={`flex justify-end pr-[33px] transition `}>
-          <div className="bg-customWhite-600 mr-4 2xl:w-[414px] p-4 rounded-[28px]">
-            <p className="text-primary-100 font-semibold 2xl:text-[3.058103975535168vh] text-[2.7522935779816513vh]">
+        <div className={`flex justify-end pr-[33px] transition`}>
+          <div className="bg-customWhite-600 mr-4 2xl:w-[414px] h-[493px] overflow-auto py-[35px] px-[38px] rounded-[28px] scrollBar-hidden">
+            <p className="text-primary-100 font-semibold text-lg leading-[27px] font-roboto mb-[7px]">
               {!!selectedVarientElements.length && selectedVarientElements[0][" Opt Sel Name"]}
             </p>
-            <div>
-              {selectedVarientElements.map((variant: any) => {
-                return <>
-                  <Selections
-                    title=""
-                    products={variant}
-                  />
-                  {/* <div className="py-4">
+            <div className=""> 
+              <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
+                Active Selection
+              </p>
+              <div className="flex flex-wrap gap-[22px] mt-[15px]">
+                {selectedVarientElements.map((variant: any) => {
+                  return <>
                     <Selections
-                      title="Default Selections"
-                      products={DefaultProducts}
+                      products={variant}
                     />
-                  </div> */}
-                </>;
-              })}
+                    {/* <div className="py-4">
+                      <Selections
+                        title="Default Selections"
+                        products={DefaultProducts}
+                      />
+                    </div> */}
+                  </>;
+                })}
+              </div>
             </div>
           </div>
           <Activites FeaturesElements={FeaturesElements} />
