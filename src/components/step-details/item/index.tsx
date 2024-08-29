@@ -54,31 +54,6 @@ const Item = (props: I_Props) => {
                   radioBox={radioBox}
                   radioToggleValue={key}
                 />
-
-                // <h3 key={optSelId}>{item_details[optSelId][0][" Opt Sel Name"]}</h3>
-                // <div key={optSelId} className="option-group">
-
-                //   <h3>
-                //     {
-                //       selectedDesignElements[location][optSelId][0][
-                //         " Opt Sel Name"
-                //       ]
-                //     }
-                //   </h3>
-                //   <>{console.log("optSelId", optSelId)}</>
-
-                //   {/* <h3>{selectedDesignElements[location][optSelId][0][" Opt Sel Name"]}</h3> */}
-
-                //   {/* {selectedDesignElements[location][optSelId].map((option: any) => (
-                //       <div key={option["id"]} className="option-card">
-                //         <div className="option-info">
-                //           <span className="option-name">{option[" Opt Val Name"]}</span>
-                //           <span className="option-price">+${option["Price"] || 0}</span>
-                //         </div>
-                //       </div>
-
-                //   ))} */}
-                // </div>
               );
             })}
           </>

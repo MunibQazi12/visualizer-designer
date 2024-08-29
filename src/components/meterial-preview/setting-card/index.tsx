@@ -1,31 +1,19 @@
-import { I_FeaturesElements, I_Products } from "@/utils/Interfaces/Products";
+import { I_FeaturesElements } from "@/utils/Interfaces/Products";
 
 import Selections from "./selections";
 import Activites from "./activites";
 
 interface I_Props {
-  ActiveProducts: I_Products[];
-  DefaultProducts: I_Products[];
   FeaturesElements: I_FeaturesElements[];
   selectedVarientElements: any;
 }
 
 const SettingCard = (props: I_Props) => {
   const {
-    ActiveProducts,
-    DefaultProducts,
     FeaturesElements,
     selectedVarientElements,
   } = props;
-
-  console.log("selectedVarientElements: ", selectedVarientElements);
-
-  // option[" Opt Sel Name"]
-  // option[" Opt Val Name"]
-  // return;
-  {
-    /* <div className={`flex justify-end pr-[33px] transition ${selectedKitchenType.cabinet_selection ? 'cabinet-fadeIn' : 'cabinet-fadeOut'}`}> */
-  }
+  
     return (
       <div style={{width: "500px"}}>
         <div className={`flex justify-end pr-[33px] transition`}>

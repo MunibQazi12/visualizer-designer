@@ -40,14 +40,8 @@ const userId = getUserPath(); // Fetch the user path based on your config
 
 const MaterialPreview = () => {
   const [products, setProducts] = useState<I_Products[]>([]);
-  const [activeProducts, setActiveProducts] = useState<I_Products[]>([]);
-  const [defaultProducts, setDefaultProducts] = useState<I_Products[]>([]);
   const [featuresElements, setFeaturesElements] = useState<
     I_FeaturesElements[]
-  >([]);
-
-  const [visualizerDesignElements, setVisualizerDesignElements] = useState<
-    I_VisualizerDesign[]
   >([]);
 
   const [selectedDesignElements, setSelectedDesignElements] = useState<any>([]);
@@ -59,7 +53,7 @@ const MaterialPreview = () => {
   const [categories, setCategories] = useState<I_Categories[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  const [currentStep, setCurrentStep] = useState<number>(0); // Start at step 1
+  const [currentStep, setCurrentStep] = useState<number>(0); 
 
   const selectedStepsHandler = (step_number: number, step_name: string) => {
     setSelectedCategory(step_name);
@@ -96,23 +90,23 @@ const MaterialPreview = () => {
     //     console.log(err);
     //   });
 
-    // Products.fetchProducts("FeaturesElements")
-    //   .then((data) => {
-    //     const products: I_FeaturesElements[] = data;
-    //     setFeaturesElements(products);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-
-    Products.fetchProducts("visualizerDesign")
+    Products.fetchProducts("FeaturesElements")
       .then((data) => {
-        const products: I_VisualizerDesign[] = data;
-        setVisualizerDesignElements(products);
+        const products: I_FeaturesElements[] = data;
+        setFeaturesElements(products);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // Products.fetchProducts("visualizerDesign")
+    //   .then((data) => {
+    //     const products: I_VisualizerDesign[] = data;
+    //     setVisualizerDesignElements(products);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
 
     Products.fetchGlobalOptions("globalOptions")
       .then((data) => {
@@ -216,8 +210,6 @@ const MaterialPreview = () => {
 
         {!!Object.keys(selectedVarientElements).length ? (
           <SettingCard
-            ActiveProducts={activeProducts}
-            DefaultProducts={defaultProducts}
             FeaturesElements={featuresElements}
             selectedVarientElements={selectedVarientElements}
           />
