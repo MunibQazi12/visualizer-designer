@@ -21,7 +21,7 @@ const Selections: FC<Props> = (props) => {
   return (
 
       <>
-        <div key={elementsToDisplay[" Opt Val Name"]} className={`w-[98px] text-center ${className} `} onClick={() => selectedSelectedElements(elementsToDisplay)}>
+        <div key={elementsToDisplay[" Opt Val Name"]} className={`w-[98px] text-center ${className} `} onClick={() => !!selectedSelectedElements && selectedSelectedElements(elementsToDisplay)}>
           <div className="w-full h-[97px] border-4 border-gray-500 rounded-2xl">          
 
             <Image

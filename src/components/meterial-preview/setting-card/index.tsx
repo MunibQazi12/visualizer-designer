@@ -32,11 +32,20 @@ const SettingCard = (props: I_Props) => {
     const currentSelectedElements = [...filteredArray];
     currentSelectedElements.push(product);
     selectedSelectedElements(currentSelectedElements);
+
+    setAvailableElementsHandler(product)
   };
 
   console.log("selectedElements: ", selectedElements);
 
-  const setAvailableElementsHandler = () => {};
+  const setAvailableElementsHandler = (product: any) => {
+
+    const filteredArray = availableElements.filter(
+      (i: any) => i["id"] !== product["id"]
+    );
+    const currentSelectedElements = [...filteredArray];
+    setAvailableElements(currentSelectedElements);
+  };
 
   const isChecked = (uuid: string, checkStr: string) => {
     console.log("aa, ", uuid);
@@ -56,7 +65,7 @@ const SettingCard = (props: I_Props) => {
     );
 
     console.log("availableElementsToShow: ", availableElementsToShow);
-
+    selectedSelectedElements([]);
     setAvailableElements(availableElementsToShow);
   }, [selectedVarientElements]);
 
@@ -69,7 +78,6 @@ const SettingCard = (props: I_Props) => {
               availableElements[0][" Opt Sel Name"]}
           </p>
           <div>
-
             <div>
               <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
                 Active Selection
