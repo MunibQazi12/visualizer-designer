@@ -69,23 +69,6 @@ const SettingCard = (props: I_Props) => {
               availableElements[0][" Opt Sel Name"]}
           </p>
           <div>
-            <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
-              Active Selection
-            </p>
-
-            <div className="overflow-auto scrollBar-hidden">
-              <div className="inline-flex gap-[22px] mt-[15px]">
-                {selectedElements.map((variant: any) => {
-                  return (
-                    <Selections
-                      key={variant[" Opt Val Name"]}
-                      elementsToDisplay={variant}
-                      className={"selected-img"}
-                    />
-                  );
-                })}
-              </div>
-            </div>
 
             <div>
               <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
@@ -129,6 +112,7 @@ const SettingCard = (props: I_Props) => {
                 </div>
               </div>
             </div>
+            
           </div>
         </div>
         <Activites FeaturesElements={FeaturesElements} />
