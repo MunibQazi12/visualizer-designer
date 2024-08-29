@@ -38,7 +38,14 @@ const StepDetails = (props: I_Props) => {
   };
 
   const handleRadioToggle = (radio_key: string, actual_value: string) => {
-    console.log("radio_key: ", radio_key,"radio_key: ", radio_key, "radioBox" ,radioBox )
+    console.log(
+      "radio_key: ",
+      radio_key,
+      "radio_key: ",
+      radio_key,
+      "radioBox",
+      radioBox
+    );
 
     // if(!radioBox.includes(actual_value)) {
     //   setRadioBox([]);
@@ -69,103 +76,53 @@ const StepDetails = (props: I_Props) => {
     );
 
     setSelectedVarientElements(returnValue);
-
-    console.log("returnValue: ", returnValue);
   };
 
   // Function to handle the scroll event
-  const handleScroll = () => {
-    console.log("handleScroll");
-    setHasScrolled(true);
+  const handleScroll = (e: any) => {
+    const scroll = e.target.scrollTop;
+
+    if (scroll > 5) {
+      setHasScrolled(true);
+    } else {
+      setScrollButtonClicked(false);
+      setHasScrolled(false);
+    }
   };
-
-  // useEffect(() => {
-  //   const divElement = divRef.current;
-  //   // Attach the scroll event listener
-  //   if (divElement) {
-  //     console.log("divElement: ", divElement);
-  //     divElement.addEventListener("scroll", handleScroll);
-
-  //     // Cleanup event listener on component unmount
-  //     return () => {
-  //       divElement.removeEventListener("scroll", handleScroll);
-  //     };
-  //   }
-  // }, [selectedDesignElements, openCards]);
 
   // Function to check the height of the div
   const checkHeight = () => {
     if (divRef.current) {
       const height = divRef.current.clientHeight;
-      console.log('openCards" ', height);
-      if(height < 530) setScrollButtonClicked(false)
+      if (height < 530) setScrollButtonClicked(false);
       setIsHeightGreaterThan530(height);
-    }    
+    }
   };
 
   // Function to scroll the div to its end
   const scrollToEnd = () => {
     const divElement = divRef.current;
     if (divElement && divScrollRef) {
-      divScrollRef.current?.scrollIntoView({ block: 'end',  behavior: 'smooth' });
-      setScrollButtonClicked(true)
+      divScrollRef.current?.scrollIntoView({
+        block: "end",
+        behavior: "smooth",
+      });
+      setScrollButtonClicked(true);
     }
   };
-  
-
-
-  // const scrollToBottom = () => {
-  //   if (divRef.current) divRef.current.scrollTop = divRef.current.scrollHeight;
-  // };
-
-  // const scrollToEnd = () => {
-  //   const divElement = divRef.current;
-  //   if (divElement) {
-  //     // console.log('scrollToEnd', divElement )
-  //     // console.log('scrollToEnd', divElement.scrollHeight, " ------- ", divElement.scrollTop )
-
-  //     console.log('Div height:', divElement.clientHeight);
-  //     console.log('Div scroll height:', divElement.scrollHeight);
-
-  //     divElement.scrollTo({
-  //       top: divElement.scrollHeight,
-  //       behavior: 'smooth',
-  //     });
-  //   }
-  // };
-
-  useEffect(() => {
-    setTimeout(()=>{
-      const current = divRef.current;
-      const handleScroll = () => {
-        if (divRef.current) {
-          console.log("Check HandleScroll",divRef?.current?.scrollTop);
-        }
-      };
-      if (current) {
-        current.addEventListener("scroll", handleScroll);
-      }
-      return () => {
-        if (current) {
-          current.removeEventListener("scroll", handleScroll);
-        }
-      };
-    },500)
-    console.log("scrollHeight",divRef?.current?.scrollHeight);
-
-  }, [divRef?.current?.scrollHeight]);
 
   useEffect(() => {
     setTimeout(() => {
       checkHeight();
-      console.log("openCards",openCards, selectedDesignElements);
     }, 300);
-
   }, [selectedDesignElements, openCards, radioBox]);
 
   return (
     <>
-      <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
+      <div
+        onScroll={handleScroll}
+        className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer"
+      >
         <div ref={divRef} className="">
           {Object.keys(selectedDesignElements).map(
             (location_item_name: string) => {
@@ -186,13 +143,14 @@ const StepDetails = (props: I_Props) => {
             }
           )}
           <div ref={divScrollRef} />
-          {isHeightGreaterThan530 > 530 && !scrollButtonClicked ? (
+          {isHeightGreaterThan530 > 530 &&
+          !scrollButtonClicked &&
+          !hasScrolled ? (
             <>
               <button onClick={scrollToEnd}>
                 <ScrollDownSvg />
               </button>
               <div className="more-data-scroll"></div>
-
             </>
           ) : null}
         </div>
