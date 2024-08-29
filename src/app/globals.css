@@ -18,6 +18,7 @@
 
 .material-preview {
   background-image: url(../../public/images/meterial-bg.png);
+  height: 100vh;
 }
 .slick-slide {
   max-width: 232px;
@@ -75,7 +76,6 @@ a {
 @media (max-height: 1040px) {
   .material-preview {
     position: relative;
-    height: 100vh;
   }
 
   .slider-container {

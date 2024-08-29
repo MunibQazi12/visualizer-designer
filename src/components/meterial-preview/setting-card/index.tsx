@@ -25,15 +25,16 @@ const SettingCard = (props: I_Props) => {
   // };
 
   const selectedSelectedElementsHandler = (product: any) => {
-
-    const filteredArray = selectedElements.filter((i: any) => i["id"] !== product["id"])
+    const filteredArray = selectedElements.filter(
+      (i: any) => i["id"] !== product["id"]
+    );
 
     const currentSelectedElements = [...filteredArray];
     currentSelectedElements.push(product);
     selectedSelectedElements(currentSelectedElements);
-  }
+  };
 
-  console.log('selectedElements: ', selectedElements)
+  console.log("selectedElements: ", selectedElements);
 
   const setAvailableElementsHandler = () => {};
 
@@ -62,47 +63,72 @@ const SettingCard = (props: I_Props) => {
   return (
     <div style={{ width: "500px" }}>
       <div className={`flex justify-end pr-[33px] transition`}>
-        <div className="bg-customWhite-600 mr-4 2xl:w-[414px] h-[493px] overflow-auto py-[35px] px-[38px] rounded-[28px] scrollBar-hidden">
+        <div className="bg-customWhite-600 mr-4 w-[414px] h-[493px] overflow-auto py-[35px] px-[38px] rounded-[28px] scrollBar-hidden">
           <p className="text-primary-100 font-semibold text-lg leading-[27px] font-roboto mb-[7px]">
             {!!availableElements.length &&
               availableElements[0][" Opt Sel Name"]}
           </p>
-          <div className="">
+          <div>
             <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
               Active Selection
             </p>
-            
-            <div className="flex flex-wrap gap-[22px] mt-[15px]">
-              {selectedElements.map((variant: any) => {
-                return (
+
+            <div className="overflow-auto scrollBar-hidden">
+              <div className="inline-flex gap-[22px] mt-[15px]">
+                {selectedElements.map((variant: any) => {
+                  return (
                     <Selections
                       key={variant[" Opt Val Name"]}
                       elementsToDisplay={variant}
-                      className={'selected-img'}
+                      className={"selected-img"}
                     />
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
 
+            <div>
+              <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
+                Active Selection
+              </p>
 
-            <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
-              Default Selection
-            </p>
-
-            <div className="flex flex-wrap gap-[22px] mt-[15px]">
-              {availableElements.map((variant: any) => {
-                return (
-                  <Selections
-                    key={variant[" Opt Val Name"]}
-                    elementsToDisplay={variant}
-                    selectedSelectedElements={selectedSelectedElementsHandler}
-                    className={''}
-
-                  />
-                );
-              })}
+              <div className="overflow-auto scrollBar-hidden">
+                <div className="inline-flex gap-[22px] mt-[15px]">
+                  {selectedElements.map((variant: any) => {
+                    return (
+                      <Selections
+                        key={variant[" Opt Val Name"]}
+                        elementsToDisplay={variant}
+                        className={"selected-img"}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
+            <div>
+              <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
+                Default Selection
+              </p>
+
+              <div className="overflow-auto scrollBar-hidden">
+                <div className="inline-flex gap-[22px] mt-[15px]">
+                  {availableElements.map((variant: any) => {
+                    return (
+                      <Selections
+                        key={variant[" Opt Val Name"]}
+                        elementsToDisplay={variant}
+                        selectedSelectedElements={
+                          selectedSelectedElementsHandler
+                        }
+                        className={""}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <Activites FeaturesElements={FeaturesElements} />
