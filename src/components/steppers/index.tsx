@@ -33,26 +33,6 @@ const CustomStepper = (props: I_Props) => {
         })}
 
         {/* <Step
-          index={1}
-          disabled={false}
-          label="1st Floor"
-          className={`${activeStep === 1 ? "active-stepper" : ""}`}
-          onClick={() => {
-            selectedSteps(1);
-          }}
-        />
-
-        <Step
-          index={2}
-          disabled={false}
-          label="2nd Floor"
-          className={`${activeStep === 2 ? "active-stepper" : ""}`}
-          onClick={() => {
-            selectedSteps(2);
-          }}
-        /> */}
-
-        <Step
           index={3}
           disabled={false}
           label={displayLabel ? "Review" : ""}
@@ -60,7 +40,7 @@ const CustomStepper = (props: I_Props) => {
           onClick={() => {
             selectedSteps(3, "Appliances");
           }}
-        />
+        /> */}
       </Stepper>
     </>
   );

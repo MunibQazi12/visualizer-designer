@@ -15,31 +15,19 @@ const SettingCard = (props: I_Props) => {
   const { FeaturesElements, selectedVarientElements, selectedVariant } = props;
 
   const [selectedElements, selectedSelectedElements] = useState<any>([]);
-
   const [availableElements, setAvailableElements] = useState<any>([]);
-  // console.log("selectedVarientElements: ", selectedVarientElements )
-
-  // const isChecked = (uuid: string, checkStr: string) => {
-  //   console.log("aa, ", uuid)
-  //   return uuid in selectedVariant?.availableOptions && checkStr in selectedVariant?.availableOptions[uuid];
-  // };
 
   const selectedSelectedElementsHandler = (product: any) => {
     const filteredArray = selectedElements.filter(
       (i: any) => i["id"] !== product["id"]
     );
-
     const currentSelectedElements = [...filteredArray];
     currentSelectedElements.push(product);
     selectedSelectedElements(currentSelectedElements);
-
-    setAvailableElementsHandler(product)
+    setAvailableElementsHandler(product);
   };
 
-  console.log("selectedElements: ", selectedElements);
-
   const setAvailableElementsHandler = (product: any) => {
-
     const filteredArray = availableElements.filter(
       (i: any) => i["id"] !== product["id"]
     );
@@ -48,7 +36,6 @@ const SettingCard = (props: I_Props) => {
   };
 
   const isChecked = (uuid: string, checkStr: string) => {
-    console.log("aa, ", uuid);
     return (
       uuid in selectedVariant?.availableOptions &&
       checkStr in selectedVariant?.availableOptions[uuid]
@@ -79,62 +66,55 @@ const SettingCard = (props: I_Props) => {
           </p>
           <div>
             <div>
+              {!!selectedElements.length ? (
+                <>
+                  <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
+                    Active Selection
+                  </p>
 
-              {
-                !!selectedElements.length ?
-                  <>
-                    <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
-                      Active Selection
-                    </p>
-
-                    <div className="overflow-auto scrollBar-hidden">
-                      <div className="inline-flex gap-[22px] mt-[15px]">
-                        {selectedElements.map((variant: any) => {
-                          return (
-                            <Selections
-                              key={variant[" Opt Val Name"]}
-                              elementsToDisplay={variant}
-                              className={"selected-img"}
-                            />
-                          );
-                        })}
-                      </div>
+                  <div className="overflow-auto scrollBar-hidden">
+                    <div className="inline-flex gap-[22px] mt-[15px]">
+                      {selectedElements.map((variant: any) => {
+                        return (
+                          <Selections
+                            key={variant[" Opt Val Name"]}
+                            elementsToDisplay={variant}
+                            className={"selected-img"}
+                          />
+                        );
+                      })}
                     </div>
-                  </>
-                  : null
-              }
-
+                  </div>
+                </>
+              ) : null}
             </div>
 
             <div>
-
-              {
-                !!availableElements.length ?
-                  <><p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
+              {!!availableElements.length ? (
+                <>
+                  <p className="text-primary-100 font-semibold text-sm leading-[21px] font-roboto mb-0">
                     Default Selection
                   </p>
 
-                    <div className="overflow-auto scrollBar-hidden">
-                      <div className="inline-flex gap-[22px] mt-[15px]">
-                        {availableElements.map((variant: any) => {
-                          return (
-                            <Selections
-                              key={variant[" Opt Val Name"]}
-                              elementsToDisplay={variant}
-                              selectedSelectedElements={
-                                selectedSelectedElementsHandler
-                              }
-                              className={""}
-                            />
-                          );
-                        })}
-                      </div>
-                    </div></>
-                  : null
-              }
-
+                  <div className="overflow-auto scrollBar-hidden">
+                    <div className="inline-flex gap-[22px] mt-[15px]">
+                      {availableElements.map((variant: any) => {
+                        return (
+                          <Selections
+                            key={variant[" Opt Val Name"]}
+                            elementsToDisplay={variant}
+                            selectedSelectedElements={
+                              selectedSelectedElementsHandler
+                            }
+                            className={""}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              ) : null}
             </div>
-
           </div>
         </div>
         <Activites FeaturesElements={FeaturesElements} />
