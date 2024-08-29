@@ -25,6 +25,17 @@ const Products = {
     }
   },
 
+  fetchaVariants: async (path: string) => {
+    const snapshot = await readDataWithUserID(path);
+    if (snapshot.exists()) {
+      const products = snapshot.val();
+      return products
+    } else {
+      console.log("No data available");
+      return [];
+    }
+  },
+
 
 
   //   onValue(collectionRef, (snapshot) => {

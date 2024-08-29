@@ -28,7 +28,7 @@ interface Option {
   [key: string]: any;
 }
 
-interface Options {
+export interface Options {
   [key: string]: Option;
 }
 
@@ -50,6 +50,8 @@ const MaterialPreview = () => {
   );
 
   const [globalOptions, setGlobalOptions] = useState<Options>({});
+  const [variants, setVariants] = useState<Options>({});
+
   const [categories, setCategories] = useState<I_Categories[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -118,6 +120,19 @@ const MaterialPreview = () => {
         console.log(err);
       });
 
+      Products.fetchaVariants("variants")
+      .then((data) => {
+        const variants: any = data;
+        setVariants(variants);
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+      
+
     // const completeData: any = grabAllData();
     // console.log("completeData: ", completeData);
   }, []);
@@ -168,10 +183,15 @@ const MaterialPreview = () => {
     return locations;
   };
 
+  const grabAvailableOptionsByVariant = (variant_id: string = "205331d4-b89e-4174-acc8-8c548946be6e") => {
+    return variants[variant_id];
+  }
+
   useEffect(() => {
     stepDetailsHeaderData();
     stepDetailsHeaderBody();
   }, [globalOptions, selectedCategory]);
+  
 
   return (
     <div className="material-preview bg-no-repeat bg-cover bg-center absolute h-full w-full object-center ">
@@ -212,6 +232,8 @@ const MaterialPreview = () => {
           <SettingCard
             FeaturesElements={featuresElements}
             selectedVarientElements={selectedVarientElements}
+            selectedVariant = {grabAvailableOptionsByVariant("205331d4-b89e-4174-acc8-8c548946be6e")}
+
           />
         ) : null}
       </div>
