@@ -21,9 +21,12 @@ const StepDetails = (props: I_Props) => {
   const [radioBox, setRadioBox] = useState<string[]>([]);
 
   const divRef = useRef<HTMLDivElement>(null);
+  const divScrollRef = useRef<HTMLDivElement>(null);
 
   const [isHeightGreaterThan530, setIsHeightGreaterThan530] =
     useState<number>(0);
+  const [scrollButtonClicked, setScrollButtonClicked] =
+    useState<boolean>(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
   const handleToggle = (card_key: string) => {
@@ -35,7 +38,7 @@ const StepDetails = (props: I_Props) => {
   };
 
   const handleRadioToggle = (radio_key: string, actual_value: string) => {
-    // console.log("radio_key: ", radio_key, "actual_value" ,actual_value )
+    console.log("radio_key: ", radio_key,"radio_key: ", radio_key, "radioBox" ,radioBox )
 
     // if(!radioBox.includes(actual_value)) {
     //   setRadioBox([]);
@@ -58,7 +61,6 @@ const StepDetails = (props: I_Props) => {
               .filter((data: any) => data[" Opt Sel ID "] === actual_value)
               .map((option: any) => {
                 return option;
-
                 // option[" Opt Val Name"]
               });
           }
@@ -95,25 +97,22 @@ const StepDetails = (props: I_Props) => {
   const checkHeight = () => {
     if (divRef.current) {
       const height = divRef.current.clientHeight;
-      console.log('divRef.current.clientHeight" ', height);
+      console.log('openCards" ', height);
+      if(height < 530) setScrollButtonClicked(false)
       setIsHeightGreaterThan530(height);
-    }
+    }    
   };
 
   // Function to scroll the div to its end
   const scrollToEnd = () => {
     const divElement = divRef.current;
-    if (divElement) {
-      console.log();
-      divElement.scrollTop = divElement.scrollHeight;
-      console.log(
-        "scrollToEnd",
-        divElement.scrollHeight,
-        " ------- ",
-        divElement.scrollTop
-      );
+    if (divElement && divScrollRef) {
+      divScrollRef.current?.scrollIntoView({ block: 'end',  behavior: 'smooth' });
+      setScrollButtonClicked(true)
     }
   };
+  
+
 
   // const scrollToBottom = () => {
   //   if (divRef.current) divRef.current.scrollTop = divRef.current.scrollHeight;
@@ -135,31 +134,39 @@ const StepDetails = (props: I_Props) => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   const current = divRef.current;
-  //   const handleScroll = () => {
-  //     if (divRef.current) {
-  //       console.log(divRef?.current?.scrollTop);
-  //     }
-  //   };
-  //   if (current) {
-  //     current.addEventListener("scroll", handleScroll);
-  //   }
-  //   return () => {
-  //     if (current) {
-  //       current.removeEventListener("scroll", handleScroll);
-  //     }
-  //   };
-  // }, [divRef?.current?.scrollTop]);
+  useEffect(() => {
+    setTimeout(()=>{
+      const current = divRef.current;
+      const handleScroll = () => {
+        if (divRef.current) {
+          console.log("Check HandleScroll",divRef?.current?.scrollTop);
+        }
+      };
+      if (current) {
+        current.addEventListener("scroll", handleScroll);
+      }
+      return () => {
+        if (current) {
+          current.removeEventListener("scroll", handleScroll);
+        }
+      };
+    },500)
+    console.log("scrollHeight",divRef?.current?.scrollHeight);
+
+  }, [divRef?.current?.scrollHeight]);
 
   useEffect(() => {
-    checkHeight();
-  }, [selectedDesignElements, openCards]);
+    setTimeout(() => {
+      checkHeight();
+      console.log("openCards",openCards, selectedDesignElements);
+    }, 300);
+
+  }, [selectedDesignElements, openCards, radioBox]);
 
   return (
     <>
       <div className="w-full max-w-[348px] ml-9 relative step-detail-container h-[530px] overflow-auto rounded-[20px] scrollBar-hidden cardsContainer">
-        <div ref={divRef}>
+        <div ref={divRef} className="">
           {Object.keys(selectedDesignElements).map(
             (location_item_name: string) => {
               const key = selectedCategory + "_" + location_item_name;
@@ -178,8 +185,8 @@ const StepDetails = (props: I_Props) => {
               );
             }
           )}
-
-          {isHeightGreaterThan530 > 510 ? (
+          <div ref={divScrollRef} />
+          {isHeightGreaterThan530 > 530 && !scrollButtonClicked ? (
             <>
               <button onClick={scrollToEnd}>
                 <ScrollDownSvg />
